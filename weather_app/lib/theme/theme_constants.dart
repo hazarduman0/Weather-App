@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:weather_app/core/app_colors.dart';
-import 'package:weather_app/core/app_text_styles.dart';
+import 'package:weather_app/core/constants/app_colors.dart';
 
 ThemeData lightTheme = ThemeData(
   brightness: Brightness.light,
-  primaryColor: lightPrimary,
+  primaryColor: darkPrimary,
   // textTheme: TextTheme(
   //   //caption1 caption2,
   //   //footnote,

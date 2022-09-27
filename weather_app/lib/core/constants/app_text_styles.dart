@@ -142,152 +142,170 @@ const caption1 = TextStyle(
   fontFamily: SF_PRO,
   height: 16.0,
   fontSize: 12.0,
-  fontWeight: FontWeight.w400
+  fontWeight: FontWeight.w400,
+  color: Colors.white
 );
 
 const caption2 = TextStyle(
   fontFamily: SF_PRO,
   height: 13.0,
   fontSize: 11.0,
-  fontWeight: FontWeight.w400
+  fontWeight: FontWeight.w400,
+  color: Colors.white
 );
 
 const footNote = TextStyle(
   fontFamily: SF_PRO,
   height: 18.0,
   fontSize: 13.0,
-  fontWeight: FontWeight.w400
+  fontWeight: FontWeight.w400,
+  color: Colors.white
 );
 
 const subheadline = TextStyle(
   fontFamily: SF_PRO,
   height: 20.0,
   fontSize: 15.0,
-  fontWeight: FontWeight.w400
+  fontWeight: FontWeight.w400,
+  color: Colors.white
 );
 
 const callout = TextStyle(
   fontFamily: SF_PRO,
   height: 21.0,
   fontSize: 16.0,
-  fontWeight: FontWeight.w600
+  fontWeight: FontWeight.w600,
+  color: Colors.white
 );
 
 const body = TextStyle(
   fontFamily: SF_PRO,
   height: 22.0,
   fontSize: 17.0,
-  fontWeight: FontWeight.w400
+  fontWeight: FontWeight.w400,
+  color: Colors.white
 );
 
 const headLine = TextStyle(
   fontFamily: SF_PRO,
   height: 22.0,
   fontSize: 17.0,
-  fontWeight: FontWeight.w600
+  fontWeight: FontWeight.w600,
+  color: Colors.white
 );
 
 const title1 = TextStyle(
   fontFamily: SF_PRO,
   height: 33.41,
   fontSize: 28.0,
-  fontWeight: FontWeight.w400
+  fontWeight: FontWeight.w400,
+  color: Colors.white
 );
 
 const title2 = TextStyle(
   fontFamily: SF_PRO,
-  height: 24.0,
   fontSize: 20.0,
-  fontWeight: FontWeight.w400
+  fontWeight: FontWeight.w400,
+  color: Colors.white
 );
 
 const title3 = TextStyle(
   fontFamily: SF_PRO,
-  height: 24.0,
-  fontSize: 20.0,
-  fontWeight: FontWeight.w400
+  fontSize: 15.0,
+  fontWeight: FontWeight.w400,
+  color: Colors.white
 );
 
 const largeTitle = TextStyle(
   fontFamily: SF_PRO,
-  height: 41.0,
   fontSize: 34.0,
-  fontWeight: FontWeight.w400
+  fontWeight: FontWeight.w400,
+  color: Colors.white
 );
 
 const boldCaption1 = TextStyle(
   fontFamily: SF_PRO,
   height: 16.0,
   fontSize: 12.0,
-  fontWeight: FontWeight.w500
+  fontWeight: FontWeight.w500,
+  color: Colors.white
 );
 
 const boldCaption2 = TextStyle(
   fontFamily: SF_PRO,
   height: 13.0,
   fontSize: 11.0,
-  fontWeight: FontWeight.w600
+  fontWeight: FontWeight.w600,
+  color: Colors.white
 );
 
 const boldFootNote = TextStyle(
   fontFamily: SF_PRO,
   height: 18.0,
   fontSize: 13.0,
-  fontWeight: FontWeight.w600
+  fontWeight: FontWeight.w600,
+  color: Colors.white
 );
 
 const boldSubheadline = TextStyle(
   fontFamily: SF_PRO,
   height: 20.0,
   fontSize: 15.0,
-  fontWeight: FontWeight.w600
+  fontWeight: FontWeight.w600,
+  color: Colors.white
 );
 
 const boldCallout = TextStyle(
   fontFamily: SF_PRO,
   height: 21.0,
   fontSize: 16.0,
-  fontWeight: FontWeight.w600
+  fontWeight: FontWeight.w600,
+  color: Colors.white
 );
 
 const boldBody = TextStyle(
   fontFamily: SF_PRO,
   height: 22.0,
   fontSize: 17.0,
-  fontWeight: FontWeight.w600
+  fontWeight: FontWeight.w600,
+  color: Colors.white
 );
 
 const boldHeadline = TextStyle(
   fontFamily: SF_PRO,
   height: 22.0,
   fontSize: 17.0,
-  fontWeight: FontWeight.w600
+  fontWeight: FontWeight.w600,
+  color: Colors.white
 );
 
 const boldTitle1 = TextStyle(
   fontFamily: SF_PRO,
   height: 33.41,
   fontSize: 28.0,
-  fontWeight: FontWeight.w700
+  fontWeight: FontWeight.w700,
+  color: Colors.white
 );
 
 const boldTitle2 = TextStyle(
   fontFamily: SF_PRO,
   height: 24.0,
   fontSize: 20.0,
-  fontWeight: FontWeight.w600
+  fontWeight: FontWeight.w600,
+  color: Colors.white
 );
 
 const boldTitle3 = TextStyle(
   fontFamily: SF_PRO,
   height: 24.0,
   fontSize: 20.0,
-  fontWeight: FontWeight.w600
+  fontWeight: FontWeight.w600,
+  color: Colors.white
 );
 
 const boldLargeTitle = TextStyle(
   fontFamily: SF_PRO,
-  height: 41.0,
   fontSize: 34.0,
-  fontWeight: FontWeight.w700
+  fontWeight: FontWeight.w700,
+  color: Colors.white
 );
