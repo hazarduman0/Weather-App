@@ -1,11 +1,6 @@
-import 'package:animated_svg/animated_svg.dart';
 import 'package:animated_svg/animated_svg_controller.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:rive/rive.dart';
-import 'package:weather_app/core/constants/app_colors.dart';
 import 'package:weather_app/core/constants/app_paddings.dart';
-import 'package:weather_app/core/constants/app_text_styles.dart';
 import 'package:weather_app/core/helpers/decoration_helper.dart';
 import 'package:weather_app/ui/widgets/weather_widget.dart';
 
