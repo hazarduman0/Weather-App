@@ -1,4 +1,3 @@
-import 'package:animated_svg/animated_svg_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:weather_app/core/constants/app_paddings.dart';
 import 'package:weather_app/core/helpers/decoration_helper.dart';
@@ -12,21 +11,6 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
-  late final SvgController controller;
-
-  @override
-  void initState() {
-    // Initialize SvgController
-    controller = AnimatedSvgController();
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    // Dispose SvgController
-    controller.dispose();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +21,7 @@ class _MainPageState extends State<MainPage> {
           height: size.height,
           width: size.width,
           child: Padding(
-            padding: fifteenpxSymmetric,
+            padding: weatherWidgetPadding(size),
             child: ListView.builder(
                 physics: const BouncingScrollPhysics(
                     parent: AlwaysScrollableScrollPhysics()),

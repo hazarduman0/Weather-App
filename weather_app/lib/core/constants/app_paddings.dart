@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-//weather widget padding
-EdgeInsets weatherWidgetPadding =
-    const EdgeInsets.only(bottom: 10.0, left: 20.0, right: 20.0);
+//weather widget inner padding
+EdgeInsets weatherWidgetInnerPadding(Size size) =>
+     EdgeInsets.only(bottom: size.height * 0.01, left: size.width * 0.05, right: size.width * 0.05);
 
-// 15 px horizontal padding
-EdgeInsets fifteenpxHorizontal =
-    const EdgeInsets.symmetric(horizontal: 15.0);
+// weather widget information horizontal padding
+EdgeInsets weatherWidgetInformationHorizontalPadding(Size size) =>
+     EdgeInsets.symmetric(horizontal: size.width * 0.05);
 
-// 15 px symmetric padding
-EdgeInsets fifteenpxSymmetric =
-    const EdgeInsets.symmetric(horizontal: 15.0, vertical: 15.0);
+// weather widget padding
+EdgeInsets weatherWidgetPadding(Size size) =>
+     EdgeInsets.symmetric(horizontal: size.width * 0.05, vertical: size.height * 0.02);
