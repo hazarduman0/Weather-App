@@ -38,6 +38,7 @@ dependencies:
   riverpod: ^1.0.3+1
   flutter_riverpod: ^1.0.3+1
   dio: ^4.0.6
+  sliding_up_panel: ^2.0.0+1
 
 dev_dependencies:
   flutter_test:
@@ -57,6 +58,7 @@ dev_dependencies:
 flutter:
   assets:
     - assets/weather_icons/
+    - assets/images/
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.

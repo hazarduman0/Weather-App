@@ -37,25 +37,29 @@ class WeatherWidget extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text('23º',
-                              style: largeTitle.copyWith(fontSize: 60.0)),
+                              style: sfPro400Weight.copyWith(fontSize: 60.0)),
                           SvgPicture.asset(
                             'assets/weather_icons/clear-day.svg',
-                            height: ((size.width * 0.5116959064327485) * 0.9) * 0.7,
-                            width: ((size.width * 0.5116959064327485) * 0.9) * 0.7,
+                            height:
+                                ((size.width * 0.5116959064327485) * 0.9) * 0.7,
+                            width:
+                                ((size.width * 0.5116959064327485) * 0.9) * 0.7,
                             fit: BoxFit.cover,
                           )
                         ],
                       ),
                     ),
                     SizedBox(
-                        height: ((size.width * 0.5116959064327485) * 0.9) * 0.24,
+                        height:
+                            ((size.width * 0.5116959064327485) * 0.9) * 0.24,
                         child: Padding(
-                          padding: weatherWidgetInformationHorizontalPadding(size),
+                          padding:
+                              weatherWidgetInformationHorizontalPadding(size),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: const [
-                              Text('London', style: title2),
-                              Text('Sunny', style: title3)
+                              Text('London', style: sfPro300Weight),
+                              Text('Sunny', style: sfPro600Weight)
                             ],
                           ),
                         ))
