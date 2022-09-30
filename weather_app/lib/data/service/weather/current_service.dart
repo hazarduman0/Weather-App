@@ -7,7 +7,7 @@ class CurrentWeatherService {
   static String baseUrl(String apiKey, String city) =>
       'http://api.weatherapi.com/v1/current.json?key=$apiKey&q=$city&aqi=no';
 
-  static Future<CurrentWeather?> getCurrentWeather(String city) async {
+   Future<CurrentWeather?> getCurrentWeather(String city) async {
     try {
       var response =
           await Dio().get(baseUrl('67ff3fafbd214bb3b3b94739222809', city));

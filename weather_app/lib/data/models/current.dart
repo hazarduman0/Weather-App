@@ -3,27 +3,27 @@ import 'package:weather_app/data/models/condation.dart';
 class Current {
   int? lastUpdatedEpoch;
   String? lastUpdated;
-  int? tempC;
-  double? tempF;
-  int? isDay;
+  num? tempC;
+  num? tempF;
+  num? isDay;
   Condition? condition;
-  double? windMph;
-  double? windKph;
-  int? windDegree;
+  num? windMph;
+  num? windKph;
+  num? windDegree;
   String? windDir;
-  int? pressureMb;
-  double? pressureIn;
-  int? precipMm;
-  int? precipIn;
-  int? humidity;
-  int? cloud;
-  double? feelslikeC;
-  double? feelslikeF;
-  int? visKm;
-  int? visMiles;
-  int? uv;
-  double? gustMph;
-  double? gustKph;
+  num? pressureMb;
+  num? pressureIn;
+  num? precipMm;
+  num? precipIn;
+  num? humidity;
+  num? cloud;
+  num? feelslikeC;
+  num? feelslikeF;
+  num? visKm;
+  num? visMiles;
+  num? uv;
+  num? gustMph;
+  num? gustKph;
 
   Current(
       {this.lastUpdatedEpoch,
