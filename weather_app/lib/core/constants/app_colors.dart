@@ -27,6 +27,17 @@ const linearColor4 = LinearGradient(colors: [
   Color.fromRGBO(174, 201, 255, 1.0),
   Color.fromRGBO(8, 48, 114, 1.0)
 ]);
+
+const slideUpGradient = LinearGradient(
+    colors: [Color.fromRGBO(46, 51, 90, 0.5), Color.fromRGBO(28, 27, 51, 0.5)]);
+
+const tabIndicatorGradient = LinearGradient(colors: [
+  Colors.transparent,
+  Color.fromRGBO(119, 88, 209, 0.6),
+  Color.fromRGBO(247, 203, 253, 0.6),
+  Colors.transparent
+]);
+
 const radialColor = RadialGradient(colors: [
   Color.fromRGBO(247, 203, 253, 1.0),
   Color.fromRGBO(119, 88, 209, 1.0)

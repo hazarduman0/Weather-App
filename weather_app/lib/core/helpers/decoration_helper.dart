@@ -13,3 +13,6 @@ BoxDecoration get mainPageDecoration => const BoxDecoration(
         fit: BoxFit.cover));
 BoxDecoration get dragHandleDecoration => BoxDecoration(
     color: Colors.grey, borderRadius: BorderRadius.circular(12.0));
+
+BoxDecoration get slideUpDecoration => const BoxDecoration(
+    gradient: slideUpGradient);

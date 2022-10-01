@@ -19,8 +19,11 @@ class MainPage extends ConsumerWidget {
         width: size.width,
         decoration: mainPageDecoration,
         child: PageView(
-          physics: controller.panelController.isAttached && (controller.panelController.isPanelOpen ||
-                  controller.panelController.isPanelAnimating)
+          controller: controller.pageViewController,
+          onPageChanged: (value) {},
+          physics: controller.panelController.isAttached &&
+                  (controller.panelController.isPanelAnimating ||
+                      controller.panelController.panelPosition != 0)
               ? const NeverScrollableScrollPhysics()
               : const BouncingScrollPhysics(
                   parent: AlwaysScrollableScrollPhysics()),

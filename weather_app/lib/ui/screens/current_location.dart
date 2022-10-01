@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
@@ -10,8 +8,6 @@ import 'package:weather_app/ui/widgets/panel_widget.dart';
 
 class CurrentLocationWeatherPage extends ConsumerWidget {
   const CurrentLocationWeatherPage({super.key});
-
-  //final panelController = PanelController();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -40,40 +36,16 @@ class CurrentLocationWeatherPage extends ConsumerWidget {
         color: Colors.black.withOpacity(0.3),
         controller: controllerWatch.panelController,
         backdropTapClosesPanel: true,
-        minHeight: size.height * 0.3,
+        minHeight: !controllerWatch.pageViewController.hasClients
+            ? size.height * (0.3)
+            : size.height * (0.3),
         maxHeight: size.height * 0.8,
         parallaxEnabled: true,
         parallaxOffset: .5,
         panelSnapping: true,
-
-        // onPanelSlide: (position) {
-        //   //log(position.toString());
-        //   if (position == 1) {
-        //     controllerRef.openPanel();
-        //   } else if (position == 0) {
-        //     controllerRef.closePanel();
-        //   }
-        // },
-
-        onPanelOpened: () {
-          controllerRead.openPanel();
+        onPanelSlide: (position) {
+          controllerRead.update();
         },
-
-        onPanelClosed: () {
-          controllerRead.closePanel();
-        },
-
-        // onPanelClosed: controllerRef.panelController.isAttached &&
-        //         controllerRef.panelController.isPanelClosed
-        //     ? () {
-        //         log('Kapandı Fonksiyon');
-        //         controllerRef.closePanel();
-        //       }
-        //     : () {
-        //         log('Açıldı Fonksiyon');
-        //         controllerRef.openPanel();
-        //       },
-
         borderRadius: const BorderRadius.vertical(top: Radius.circular(30.0)),
         panelBuilder: (sc) => PanelWidget(
           controller: sc,
