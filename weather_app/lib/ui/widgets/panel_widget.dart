@@ -6,9 +6,11 @@ import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'package:weather_app/controllers/app_page_controller.dart';
 import 'package:weather_app/core/constants/app_colors.dart';
 import 'package:weather_app/core/constants/app_keys.dart';
+import 'package:weather_app/core/constants/app_paddings.dart';
 import 'package:weather_app/core/constants/app_text_styles.dart';
 import 'package:weather_app/core/helpers/decoration_helper.dart';
 import 'package:weather_app/data/providers/providers.dart';
+import 'package:weather_app/ui/widgets/forecast_info_widget.dart';
 
 class PanelWidget extends ConsumerWidget {
   final ScrollController controller;
@@ -36,7 +38,24 @@ class PanelWidget extends ConsumerWidget {
                 buildDragHandle(),
                 SizedBox(height: size.height * 0.02),
                 tabBarBuild(size),
-                Divider()
+                const Divider(),
+                SizedBox(height: size.height * 0.02),
+                SizedBox( //tabview
+                  height: size.height * 0.15,
+                  width: size.width,
+                  child: ListView.builder(
+                    padding: weatherWidgetInformationHorizontalPadding(size),
+                    physics: const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
+                    scrollDirection: Axis.horizontal,
+                    itemCount: 5,
+                    itemBuilder: (context, index) {
+                      return Padding(
+                        padding: forecastInfoWidgetHorizontalPadding(size),
+                        child: ForecastInfoWidget(),
+                      );
+                    },
+                  ),
+                ),
               ],
             ),
           ),

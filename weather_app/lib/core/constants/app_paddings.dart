@@ -11,3 +11,6 @@ EdgeInsets weatherWidgetInformationHorizontalPadding(Size size) =>
 // weather widget padding
 EdgeInsets weatherWidgetPadding(Size size) =>
      EdgeInsets.symmetric(horizontal: size.width * 0.05, vertical: size.height * 0.02);
+
+EdgeInsets forecastInfoWidgetHorizontalPadding(Size size) =>
+     EdgeInsets.symmetric(horizontal: size.width * 0.02);

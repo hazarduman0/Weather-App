@@ -296,4 +296,5 @@ String? nightIconPath(String condition) {
 
 String weatherIconAssetPath(String text) => 'assets/weather_icons/$text.svg';
 
-String conditionFormat(String condition) => condition.toLowerCase().replaceAll(' ', '');
+String conditionFormat(String condition) =>
+    condition.toLowerCase().replaceAll(' ', '');

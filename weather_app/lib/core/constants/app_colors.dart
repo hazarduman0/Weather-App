@@ -28,6 +28,27 @@ const linearColor4 = LinearGradient(colors: [
   Color.fromRGBO(8, 48, 114, 1.0)
 ]);
 
+LinearGradient weatherInfoGradient(double opacity1, double opacity2) {
+  double op1 = opacity1;
+  double op2 = opacity2;
+
+  if (opacity1 >= 1.0) op1 = 1.0;
+  if (opacity1 <= 0.0) op1 = 0.0;
+  if (opacity2 >= 1.0) op2 = 1.0;
+  if (opacity2 <= 0.0) op2 = 0.0;
+
+  return LinearGradient(colors: [
+    Color.fromRGBO(72, 49, 157, op1),
+    Color.fromRGBO(255, 255, 255, op2),
+  ], 
+  stops: [
+    0.8,
+    1.0
+  ],
+  // transform: const GradientRotation(pi / 4)
+  );
+}
+
 const slideUpGradient = LinearGradient(
     colors: [Color.fromRGBO(46, 51, 90, 0.5), Color.fromRGBO(28, 27, 51, 0.5)]);
 
@@ -53,6 +74,21 @@ const solidColor1 = Color.fromRGBO(72, 49, 157, 1.0);
 const solidColor2 = Color.fromRGBO(31, 29, 71, 1.0);
 const solidColor3 = Color.fromRGBO(196, 39, 251, 1.0);
 const solidColor4 = Color.fromRGBO(224, 217, 255, 1.0);
+
+Color blackWithOpacity(double opacity) {
+  double op = opacity;
+  if (opacity >= 1.0) op = 1.0;
+  if (opacity <= 0.0) op = 0.0;
+  return Color.fromRGBO(255, 255, 255, op);
+}
+
+Color whiteWithOpacity(double opacity) {
+  double op = opacity;
+  if (opacity >= 1.0) op = 1.0;
+  if (opacity <= 0.0) op = 0.0;
+  return Color.fromRGBO(0, 0, 0, op);
+}
+
 
 
 // import 'dart:math';
