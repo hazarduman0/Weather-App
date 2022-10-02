@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
@@ -9,19 +10,28 @@ import 'package:weather_app/core/constants/app_keys.dart';
 import 'package:weather_app/core/constants/app_paddings.dart';
 import 'package:weather_app/core/constants/app_text_styles.dart';
 import 'package:weather_app/core/helpers/decoration_helper.dart';
+import 'package:weather_app/core/helpers/helper.dart';
+import 'package:weather_app/data/models/hour.dart';
 import 'package:weather_app/data/providers/providers.dart';
 import 'package:weather_app/ui/widgets/forecast_info_widget.dart';
 
-class PanelWidget extends ConsumerWidget {
+
+
+class PanelWidget extends StatelessWidget {
   final ScrollController controller;
   final PanelController panelController;
 
-  const PanelWidget(
-      {super.key, required this.controller, required this.panelController});
+  PanelWidget({
+    super.key,
+    required this.controller,
+    required this.panelController,
+  });
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
+    log('panelwidget çizildi');
     Size size = MediaQuery.of(context).size;
+
     return DefaultTabController(
       length: 2,
       child: ClipRRect(
@@ -40,22 +50,7 @@ class PanelWidget extends ConsumerWidget {
                 tabBarBuild(size),
                 const Divider(),
                 SizedBox(height: size.height * 0.02),
-                SizedBox( //tabview
-                  height: size.height * 0.15,
-                  width: size.width,
-                  child: ListView.builder(
-                    padding: weatherWidgetInformationHorizontalPadding(size),
-                    physics: const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
-                    scrollDirection: Axis.horizontal,
-                    itemCount: 5,
-                    itemBuilder: (context, index) {
-                      return Padding(
-                        padding: forecastInfoWidgetHorizontalPadding(size),
-                        child: ForecastInfoWidget(),
-                      );
-                    },
-                  ),
-                ),
+                hourlyForecastView(size), //tabbarview oluştur
               ],
             ),
           ),
@@ -63,6 +58,55 @@ class PanelWidget extends ConsumerWidget {
       ),
     );
   }
+
+  Widget hourlyForecastView(Size size) => Consumer(
+        builder: (context, ref, child) {
+          final forecastInfo = ref.watch(cityAndDay);
+          final response = ref.watch(forecastWeatherResponse(forecastInfo));
+
+          return response.map(
+            data: (data) {
+              List<Hour>? hourList = forecastHourFormar([
+                data.value!.forecast!.forecastday!.first,
+                data.value!.forecast!.forecastday![1]
+              ]);
+              int currentHour = DateTime.now().hour;
+              return SizedBox(
+                //tabview
+                height: size.height * 0.15,
+                width: size.width,
+                child: ListView.builder(
+                  padding: weatherWidgetInformationHorizontalPadding(size),
+                  physics: const BouncingScrollPhysics(
+                      parent: AlwaysScrollableScrollPhysics()),
+                  scrollDirection: Axis.horizontal,
+                  itemCount:
+                      hourList!.length, //tabbar controllerine göre değer ver
+                  itemBuilder: (context, index) {
+                    DateTime dt = DateTime.parse(hourList[index].time!);
+                    TimeOfDay formarHour = TimeOfDay(
+                        hour: int.parse(dt.hour.toString()),
+                        minute: int.parse('0'));
+
+                    return Padding(
+                        padding: forecastInfoWidgetHorizontalPadding(size),
+                        child: ForecastInfoWidget(
+                          condition: hourList[index].condition!.text!,
+                          hour:
+                              formarHour.format(context).replaceAll(':00', ''),
+                          temp: hourList[index].tempC!.floor(),
+                          isDay: hourList[index].isDay == 1,
+                          isNow: dt.hour == currentHour,
+                        ));
+                  },
+                ),
+              );
+            },
+            error: (error) => Text('Something went wrong. Error: $error'),
+            loading: (loading) => loadingInfo(size),
+          );
+        },
+      );
 
   Widget tabBarBuild(Size size) => TabBar(
           labelStyle: sfPro600Weight.copyWith(fontSize: size.width * 0.04),
@@ -99,5 +143,26 @@ class PanelWidget extends ConsumerWidget {
         },
       );
 
-  // void tooglePanel() => panelController.isPanelOpen ? panelController.close() : panelController.open();
+  Widget loadingInfo(Size size) => SizedBox(
+        //tabview
+        height: size.height * 0.15,
+        width: size.width,
+        child: ListView.builder(
+          padding: weatherWidgetInformationHorizontalPadding(size),
+          physics: const NeverScrollableScrollPhysics(),
+          scrollDirection: Axis.horizontal,
+          itemCount: 5,
+          itemBuilder: (context, index) {
+            return Padding(
+                padding: forecastInfoWidgetHorizontalPadding(size),
+                child: Container(
+                  height: size.height * 0.15,
+                  width: size.width * 0.15,
+                  decoration: forecastInfoDecoration(false),
+                ));
+          },
+        ),
+      );
+
+  //void tooglePanel() => panelController.isPanelOpen ? panelController.close() : panelController.open();
 }

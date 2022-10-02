@@ -17,23 +17,22 @@ BoxDecoration get dragHandleDecoration => BoxDecoration(
 BoxDecoration get slideUpDecoration =>
     const BoxDecoration(gradient: slideUpGradient);
 
-BoxDecoration forecastInfoDecoration(double opacity1, double opacity2) =>
-    BoxDecoration(
-        gradient: weatherInfoGradient(opacity1, opacity2),
-        borderRadius: BorderRadius.circular(50.0),
-        boxShadow: [
-          BoxShadow(
-              color: whiteWithOpacity(0.25),
-              blurRadius: 5.0,
-              spreadRadius: 2.0,
-              blurStyle: BlurStyle.outer),
-          BoxShadow(
-              color: blackWithOpacity(0.25),
-              blurRadius: 100.0,
-              spreadRadius: 2.0,
-              blurStyle: BlurStyle.inner)
-        ],
-        border: Border.all(
-            color: blackWithOpacity(0.2),
-            width: 1.0,
-            strokeAlign: StrokeAlign.inside));
+BoxDecoration forecastInfoDecoration(bool isNow) => BoxDecoration(
+    gradient: isNow ? weatherInfoNowGradient() : weatherInfoGradient(),
+    borderRadius: BorderRadius.circular(50.0),
+    boxShadow: [
+      BoxShadow(
+          color: whiteWithOpacity(0.25),
+          blurRadius: 5.0,
+          spreadRadius: 2.0,
+          blurStyle: BlurStyle.outer),
+      BoxShadow(
+          color: blackWithOpacity(0.25),
+          blurRadius: 100.0,
+          spreadRadius: 2.0,
+          blurStyle: BlurStyle.inner)
+    ],
+    border: Border.all(
+        color: blackWithOpacity(0.2),
+        width: 1.0,
+        strokeAlign: StrokeAlign.inside));

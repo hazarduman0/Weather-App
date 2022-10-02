@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
@@ -7,14 +9,19 @@ import 'package:weather_app/data/providers/providers.dart';
 import 'package:weather_app/ui/widgets/panel_widget.dart';
 
 class CurrentLocationWeatherPage extends ConsumerWidget {
-  const CurrentLocationWeatherPage({super.key});
+  CurrentLocationWeatherPage({super.key});
+
+  //var map = const {'London': 7};
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    log('CurrentLocationWeatherPage çizildi');
     Size size = MediaQuery.of(context).size;
     final controllerWatch = ref.watch<AppPageController>(appPageController);
     final controllerRead = ref.read<AppPageController>(appPageController);
-    final response = ref.watch(currentWeatherResponse('London'));
+    //final response = ref.watch(currentWeatherResponse('London'));
+    final forecastInfo = ref.watch(cityAndDay);
+    final response = ref.watch(forecastWeatherResponse(forecastInfo));
     return SizedBox(
       height: size.height,
       width: size.width,
@@ -50,6 +57,7 @@ class CurrentLocationWeatherPage extends ConsumerWidget {
         panelBuilder: (sc) => PanelWidget(
           controller: sc,
           panelController: controllerWatch.panelController,
+          //forecastday: response.value?.forecast?.forecastday ,
         ),
       ),
     );

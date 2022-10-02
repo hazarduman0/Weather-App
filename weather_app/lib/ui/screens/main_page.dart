@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:weather_app/controllers/app_page_controller.dart';
@@ -11,6 +13,7 @@ class MainPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    log('MainPage çizildi');
     Size size = MediaQuery.of(context).size;
     final controller = ref.watch<AppPageController>(appPageController);
     return Scaffold(
@@ -27,7 +30,7 @@ class MainPage extends ConsumerWidget {
               ? const NeverScrollableScrollPhysics()
               : const BouncingScrollPhysics(
                   parent: AlwaysScrollableScrollPhysics()),
-          children: const [CurrentLocationWeatherPage(), AddedLocation()],
+          children:  [CurrentLocationWeatherPage(), const AddedLocation()],
         ),
       ),
     );
