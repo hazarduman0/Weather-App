@@ -7,6 +7,7 @@ import 'package:weather_app/core/helpers/decoration_helper.dart';
 import 'package:weather_app/data/providers/providers.dart';
 import 'package:weather_app/ui/screens/added_locations.dart';
 import 'package:weather_app/ui/screens/current_location.dart';
+import 'package:weather_app/ui/screens/test_page.dart';
 
 class MainPage extends ConsumerWidget {
   const MainPage({super.key});
@@ -23,14 +24,8 @@ class MainPage extends ConsumerWidget {
         decoration: mainPageDecoration,
         child: PageView(
           controller: controller.pageViewController,
-          onPageChanged: (value) {},
-          physics: controller.panelController.isAttached &&
-                  (controller.panelController.isPanelAnimating ||
-                      controller.panelController.panelPosition != 0)
-              ? const NeverScrollableScrollPhysics()
-              : const BouncingScrollPhysics(
-                  parent: AlwaysScrollableScrollPhysics()),
-          children:  [CurrentLocationWeatherPage(), const AddedLocation()],
+          physics: const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
+          children:  [CurrentLocationWeatherPage(), const AddedLocation(), const TestPage()],
         ),
       ),
     );

@@ -15,8 +15,6 @@ import 'package:weather_app/data/models/hour.dart';
 import 'package:weather_app/data/providers/providers.dart';
 import 'package:weather_app/ui/widgets/forecast_info_widget.dart';
 
-
-
 class PanelWidget extends StatelessWidget {
   final ScrollController controller;
   final PanelController panelController;
@@ -62,8 +60,9 @@ class PanelWidget extends StatelessWidget {
   Widget hourlyForecastView(Size size) => Consumer(
         builder: (context, ref, child) {
           final forecastInfo = ref.watch(cityAndDay);
-          final response = ref.watch(forecastWeatherResponse(forecastInfo));
-
+          final response = ref.watch(forecastWeatherResponse(
+              forecastInfo)); //bilgiler provider den mi yoksa üst widgetten mi alınsın değerlendir.
+          //provider, scroll hareketinde ekranın yeniden çizilmesine neden oluyor.
           return response.map(
             data: (data) {
               List<Hour>? hourList = forecastHourFormar([

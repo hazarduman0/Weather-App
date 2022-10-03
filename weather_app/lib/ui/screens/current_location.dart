@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'package:weather_app/controllers/app_page_controller.dart';
 import 'package:weather_app/core/constants/app_text_styles.dart';
+import 'package:weather_app/core/helpers/helper.dart';
 import 'package:weather_app/data/providers/providers.dart';
 import 'package:weather_app/ui/widgets/panel_widget.dart';
 
@@ -43,16 +44,16 @@ class CurrentLocationWeatherPage extends ConsumerWidget {
         color: Colors.black.withOpacity(0.3),
         controller: controllerWatch.panelController,
         backdropTapClosesPanel: true,
-        minHeight: !controllerWatch.pageViewController.hasClients
-            ? size.height * (0.3)
-            : size.height * (0.3),
+        // minHeight: !controllerWatch.pageViewController.hasClients
+        //     ? size.height * (0.3)
+        //     : size.height * (0.3),
+        //minHeight: panelMinHeightFormar(controllerWatch.pageViewController, size, (){controllerRead.update();}),
+        //minHeight: controllerWatch.panelMinHeight,
+        minHeight: size.height * (0.3),
         maxHeight: size.height * 0.8,
         parallaxEnabled: true,
         parallaxOffset: .5,
         panelSnapping: true,
-        onPanelSlide: (position) {
-          controllerRead.update();
-        },
         borderRadius: const BorderRadius.vertical(top: Radius.circular(30.0)),
         panelBuilder: (sc) => PanelWidget(
           controller: sc,
