@@ -5,7 +5,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'package:weather_app/controllers/app_page_controller.dart';
 import 'package:weather_app/core/constants/app_text_styles.dart';
-import 'package:weather_app/core/helpers/helper.dart';
 import 'package:weather_app/data/providers/providers.dart';
 import 'package:weather_app/ui/widgets/panel_widget.dart';
 
@@ -21,8 +20,7 @@ class CurrentLocationWeatherPage extends ConsumerWidget {
     final controllerWatch = ref.watch<AppPageController>(appPageController);
     final controllerRead = ref.read<AppPageController>(appPageController);
     //final response = ref.watch(currentWeatherResponse('London'));
-    final forecastInfo = ref.watch(cityAndDay);
-    final response = ref.watch(forecastWeatherResponse(forecastInfo));
+
     return SizedBox(
       height: size.height,
       width: size.width,
@@ -31,14 +29,7 @@ class CurrentLocationWeatherPage extends ConsumerWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             SizedBox(height: size.height * 0.2),
-            response.map(
-                data: (data) => weatherInformationTexts(
-                    size,
-                    data.value!.location!.name!,
-                    data.value!.current!.tempC!.toString(),
-                    data.value!.current!.condition!.text!),
-                error: (error) => Text('Something went wrong. Error: $error'),
-                loading: (loading) => const CircularProgressIndicator())
+            weatherInformationTexts(size)
           ],
         ),
         color: Colors.black.withOpacity(0.3),
@@ -65,22 +56,33 @@ class CurrentLocationWeatherPage extends ConsumerWidget {
   }
 }
 
-Widget weatherInformationTexts(
-        Size size, String district, String temp, String condition) =>
-    Column(
-      mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Text(district,
-            style: sfPro400Weight.copyWith(fontSize: size.width * 0.07)),
-        Text(
-          '$temp°',
-          style: sfPro200Weight.copyWith(fontSize: size.width * 0.16),
-        ),
-        Text(
-          condition,
-          style: sfPro600Weight.copyWith(fontSize: size.width * 0.05),
-        ),
-      ],
+Widget weatherInformationTexts(Size size) => Consumer(
+      builder: (context, ref, child) {
+        log('weather information çizildi');
+        final forecastInfo = ref.watch(cityAndDay);
+        final response = ref.watch(forecastWeatherResponse(forecastInfo));
+        return response.map(
+            data: (data) => Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(data.value!.location!.name!,
+                        style: sfPro400Weight.copyWith(
+                            fontSize: size.width * 0.07)),
+                    Text(
+                      '${data.value!.current!.tempC!.floor().toString()}°',
+                      style:
+                          sfPro200Weight.copyWith(fontSize: size.width * 0.16),
+                    ),
+                    Text(
+                      data.value!.current!.condition!.text!,
+                      style:
+                          sfPro600Weight.copyWith(fontSize: size.width * 0.05),
+                    ),
+                  ],
+                ),
+            error: (error) => Text('Something went wrong. Error: $error'),
+            loading: (loading) => const CircularProgressIndicator());
+      },
     );

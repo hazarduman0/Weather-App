@@ -31,4 +31,4 @@ final forecastWeatherResponse =
 final appPageController = ChangeNotifierProvider((ref) => AppPageController());
 
 // city and day info
-final cityAndDay = Provider((ref) => {'London' : 7});
+final cityAndDay = Provider((ref) => {'Bursa' : 7});

@@ -13,7 +13,13 @@ import 'package:weather_app/core/helpers/decoration_helper.dart';
 import 'package:weather_app/core/helpers/helper.dart';
 import 'package:weather_app/data/models/hour.dart';
 import 'package:weather_app/data/providers/providers.dart';
+import 'package:weather_app/ui/widgets/feels_like_widget.dart';
 import 'package:weather_app/ui/widgets/forecast_info_widget.dart';
+import 'package:weather_app/ui/widgets/humidity_widget.dart';
+import 'package:weather_app/ui/widgets/sunrise_sunset_widget.dart';
+import 'package:weather_app/ui/widgets/uv_index_widget.dart';
+import 'package:weather_app/ui/widgets/visibility_widget.dart';
+import 'package:weather_app/ui/widgets/wind_widget.dart';
 
 class PanelWidget extends StatelessWidget {
   final ScrollController controller;
@@ -49,6 +55,20 @@ class PanelWidget extends StatelessWidget {
                 const Divider(),
                 SizedBox(height: size.height * 0.02),
                 hourlyForecastView(size), //tabbarview oluştur
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 40.0),
+                  child: Wrap(
+                    spacing: size.width * 0.05,
+                    runSpacing: size.width * 0.05,
+                    children: const[
+                    UvIndexWidget(),
+                    SunriseSunsetWidget(),
+                    WindWidget(),
+                    FeelsLikeWidget(),
+                    VisibilityWidget(),
+                    HumidityWidget()
+                  ]),
+                )
               ],
             ),
           ),

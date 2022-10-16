@@ -1,14 +1,14 @@
 import 'dart:developer';
 
-import 'package:flutter/material.dart';
-import 'package:weather_app/core/extensions.dart';
 import 'package:weather_app/data/models/forecast.dart';
 import 'package:weather_app/data/models/hour.dart';
 
 List<Hour>? forecastHourFormar(List<Forecastday>? forecastday) {
   int hour = DateTime.now().hour;
   List<Hour>? hourList = [];
+  log('hour: $hour');
   for (int i = 0; i < forecastday!.first.hour!.length; i++) {
+    log('DateTime.parse(forecastday.first.hour![i].time!).hour : ${DateTime.parse(forecastday.first.hour![i].time!).hour}');
     if (DateTime.parse(forecastday.first.hour![i].time!).hour >= hour) {
       hourList.add(forecastday.first.hour![i]);
     }

@@ -17,6 +17,12 @@ BoxDecoration get dragHandleDecoration => BoxDecoration(
 BoxDecoration get slideUpDecoration =>
     const BoxDecoration(gradient: slideUpGradient);
 
+BoxDecoration get curretDataWidgetsDecorations => BoxDecoration(
+    color: Color.fromRGBO(72, 49, 157, 0.3),
+    borderRadius: BorderRadius.circular(20.0),
+    border:
+        Border.all(color: const Color.fromARGB(115, 124, 59, 167), width: 3.0));
+
 BoxDecoration forecastInfoDecoration(bool isNow) => BoxDecoration(
     gradient: isNow ? weatherInfoNowGradient() : weatherInfoGradient(),
     borderRadius: BorderRadius.circular(50.0),

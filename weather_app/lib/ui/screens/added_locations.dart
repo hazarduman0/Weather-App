@@ -3,8 +3,8 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:weather_app/controllers/app_page_controller.dart';
-import 'package:weather_app/core/constants/app_text_styles.dart';
 import 'package:weather_app/data/providers/providers.dart';
+import 'package:weather_app/ui/widgets/weather_widget.dart';
 
 class AddedLocation extends ConsumerWidget {
   const AddedLocation({super.key});
@@ -18,9 +18,13 @@ class AddedLocation extends ConsumerWidget {
     return SizedBox(
         height: size.height,
         width: size.width,
-        child: Center(
-          child: Text('İkinci Sayfa',
-              style: sfPro700Weight.copyWith(fontSize: 30)),
-        ));
+        child: ListView.builder(
+          itemCount: 7,
+          itemBuilder: (context, index) {
+          return const Padding(
+            padding:  EdgeInsets.symmetric(horizontal: 20.0),
+            child: WeatherWidget(),
+          );
+        },));
   }
 }
