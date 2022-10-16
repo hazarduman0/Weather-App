@@ -57,8 +57,8 @@ class WeatherWidget extends StatelessWidget {
                               weatherWidgetInformationHorizontalPadding(size),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: const [
-                              Text('London', style: sfPro300Weight),
+                            children:  [
+                              Text('London', style: sfPro300Weight.copyWith(fontSize: size.width * 0.06)),
                               Text('Sunny', style: sfPro600Weight)
                             ],
                           ),

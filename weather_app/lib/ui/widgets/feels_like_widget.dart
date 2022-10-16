@@ -33,7 +33,7 @@ class FeelsLikeWidget extends StatelessWidget {
               ],
             ),
             SizedBox(height: size.height * 0.02),
-            Text('19 °C',style: sfPro500Weight.copyWith(color: Colors.white, fontSize: size.width * 0.12),)
+            Text('19 °C',style: sfPro500Weight.copyWith(color: Colors.white, fontSize: size.width * 0.12))
           ],
         ),
       ),

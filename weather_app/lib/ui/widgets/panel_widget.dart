@@ -45,6 +45,7 @@ class PanelWidget extends StatelessWidget {
           child: Container(
             decoration: slideUpDecoration,
             child: ListView(
+              physics: const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
               controller: controller,
               padding: EdgeInsets.zero,
               children: [
@@ -136,7 +137,7 @@ class PanelWidget extends StatelessWidget {
             borderRadius: BorderRadius.all(Radius.circular(20.0)),
           ),
           indicatorWeight: 0,
-          indicatorPadding: EdgeInsets.only(top: size.height * 0.055),
+          indicatorPadding: const EdgeInsets.only(top: 45), //size.height * 0.055
           tabs: const [
             Tab(text: hourlyForecast),
             Tab(
