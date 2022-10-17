@@ -81,14 +81,15 @@ class PanelWidget extends StatelessWidget {
   Widget hourlyForecastView(Size size) => Consumer(
         builder: (context, ref, child) {
           final forecastInfo = ref.watch(cityAndDay);
-          final response = ref.watch(forecastWeatherResponse(
-              forecastInfo)); //bilgiler provider den mi yoksa üst widgetten mi alınsın değerlendir.
+          final response = ref.watch(forecastWeatherResponse(forecastInfo)); 
+          //bilgiler provider den mi yoksa üst widgetten mi alınsın değerlendir.
           //provider, scroll hareketinde ekranın yeniden çizilmesine neden oluyor.
+          final forecastResponse = ref.watch(forecastProvider(forecastInfo));
           return response.map(
             data: (data) {
               List<Hour>? hourList = forecastHourFormar([
-                data.value!.forecast!.forecastday!.first,
-                data.value!.forecast!.forecastday![1]
+                forecastResponse!.forecastday!.first,
+                forecastResponse.forecastday![1]
               ]);
               int currentHour = DateTime.now().hour;
               return SizedBox(

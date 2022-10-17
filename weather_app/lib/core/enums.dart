@@ -99,3 +99,11 @@ enum NightCondition {
   patchylightsnowwiththunder,
   moderateorheavysnowwiththunder
 }
+
+enum UvIndex{
+  low,
+  medium,
+  high,
+  veryhigh,
+  extremelyhigh
+}

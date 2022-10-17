@@ -1,5 +1,7 @@
 import 'dart:developer';
 
+import 'package:weather_app/core/enums.dart';
+import 'package:weather_app/core/extensions.dart';
 import 'package:weather_app/data/models/forecast.dart';
 import 'package:weather_app/data/models/hour.dart';
 
@@ -19,6 +21,29 @@ List<Hour>? forecastHourFormar(List<Forecastday>? forecastday) {
   }
 
   return hourList;
+}
+
+String uvStatus(num index) {
+  switch (index) {
+    case 1:
+    case 2:
+      return UvExtension(UvIndex.low).uvString();
+    case 3:
+    case 4:
+    case 5:
+      return UvExtension(UvIndex.medium).uvString();
+    case 6:
+    case 7:
+      return UvExtension(UvIndex.high).uvString();
+    case 8:
+    case 9:
+    case 10:
+      return UvExtension(UvIndex.veryhigh).uvString();
+    case 11:
+      return UvExtension(UvIndex.extremelyhigh).uvString();
+    default:
+      return UvExtension(UvIndex.extremelyhigh).uvString();
+  }
 }
 
 // double panelMinHeightFormar(PageController pageController, Size size, Function func) {
