@@ -9,6 +9,7 @@ class ForecastWeatherService {
 
   Future<ForecastWeather?> getForecastWeather(int day, String city) async {
     try {
+      log('sorguya girildi');
       var response = await Dio()
           .get(_baseUrl('67ff3fafbd214bb3b3b94739222809', city, day));
       if (response.statusCode == 200) {

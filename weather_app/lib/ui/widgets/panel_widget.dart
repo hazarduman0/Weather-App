@@ -148,7 +148,7 @@ class PanelWidget extends StatelessWidget {
 
   Widget buildDragHandle() => Consumer(
         builder: (context, ref, child) {
-          final controllerRef = ref.watch<AppPageController>(appPageController);
+          final controllerRef = ref.watch<AppPageController>(appPageControllerProvider);
           return GestureDetector(
             onTap: () {
               controllerRef.tooglePanel();

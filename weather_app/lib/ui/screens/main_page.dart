@@ -16,8 +16,9 @@ class MainPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     log('MainPage çizildi');
     Size size = MediaQuery.of(context).size;
-    final controller = ref.watch<AppPageController>(appPageController);
+    final controller = ref.watch<AppPageController>(appPageControllerProvider);
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: Container(
         height: size.height,
         width: size.width,

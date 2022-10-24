@@ -21,8 +21,8 @@ class CurrentLocationWeatherPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     log('CurrentLocationWeatherPage çizildi');
     Size size = MediaQuery.of(context).size;
-    final controllerWatch = ref.watch<AppPageController>(appPageController);
-    final controllerRead = ref.read<AppPageController>(appPageController);
+    final controllerWatch = ref.watch<AppPageController>(appPageControllerProvider);
+    final controllerRead = ref.read<AppPageController>(appPageControllerProvider);
     //final response = ref.watch(currentWeatherResponse('London'));
 
     return SizedBox(

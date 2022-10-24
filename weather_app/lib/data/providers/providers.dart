@@ -1,8 +1,10 @@
 import 'dart:developer';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:weather_app/controllers/app_page_controller.dart';
 import 'package:weather_app/controllers/data_controller.dart';
+import 'package:weather_app/controllers/form_conroller.dart';
 import 'package:weather_app/data/models/condation.dart';
 import 'package:weather_app/data/models/current.dart';
 import 'package:weather_app/data/models/forecast.dart';
@@ -33,6 +35,7 @@ final currentWeatherResponse =
 final forecastWeatherResponse =
     FutureProvider.family<ForecastWeather?, Map<String, int>>(
         (ref, forecastInfos) async {
+  log('providere girildi');
   final forecastDio = ref.watch<ForecastWeatherService>(forecastWeatherService);
   return await forecastDio.getForecastWeather(
       forecastInfos.values.first, forecastInfos.keys.first);
@@ -140,8 +143,28 @@ final visibilityMilesProvider = Provider.family((ref, Map<String, int> infos) {
   return currentInfo!.visMiles;
 });
 
+//wind kph
+final windKphProvider = Provider.family((ref, Map<String, int> infos) {
+  final currentInfo = ref.watch(currentProvider(infos));
+  return currentInfo!.windKph;
+});
+
+//TODO: windmph ekle
+
+final windDirectionProvider = Provider.family((ref, Map<String, int> infos) {
+  final currentInfo = ref.watch(currentProvider(infos));
+  return currentInfo!.windDir;
+});
+
+//final textEditingControllerProvider = Provider((ref) => TextEditingController());
+
 // AppPageController() provider
-final appPageController = ChangeNotifierProvider((ref) => AppPageController());
+final appPageControllerProvider =
+    ChangeNotifierProvider((ref) => AppPageController());
+
+//FormController() provider
+final formControllerProvider =
+    ChangeNotifierProvider((ref) => FormController());  
 
 // city and day info
 final cityAndDay = Provider((ref) => {'Berlin': 7});
