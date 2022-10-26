@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 
 class FormController extends ChangeNotifier {
-  final TextEditingController _textEditingController =
-      TextEditingController();
+  final TextEditingController _textEditingController = TextEditingController();
 
   TextEditingController get textEditingController => _textEditingController;
 

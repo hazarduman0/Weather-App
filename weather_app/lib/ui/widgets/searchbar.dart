@@ -19,14 +19,17 @@ class SearchBar extends StatelessWidget {
             padding: EdgeInsets.symmetric(horizontal: size.width * 0.01),
             child: Consumer(
               builder: (context, ref, child) {
+                final controller = ref.watch(formControllerProvider);
                 return TextFormField(
+                  controller: controller.textEditingController,
                   cursorHeight: size.height * 0.04,
                   cursorColor: Colors.white,
                   style: sfPro400Weight.copyWith(fontSize: size.width * 0.05),
                   decoration: inputDecoration,
                   autofocus: true,
                   onChanged: (value) {
-                    ref.read(searchProvider(value));
+                    //ref.read(searchProvider(value));
+                    controller.update();
                   },
                 );
               },

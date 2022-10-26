@@ -25,7 +25,7 @@ final forecastWeatherServiceProvider =
     Provider((ref) => ForecastWeatherService());
 
 // SearchService() provider
-final searchServiceProvider = Provider((ref) => SearchService());
+final searchServiceProvider = Provider.autoDispose((ref) => SearchService());
 
 // Current weather response
 final currentWeatherResponse =
@@ -52,7 +52,7 @@ final forecastWeatherResponse =
 
 // search response
 final searchProvider =
-    FutureProvider.family<List<SearchModel>?, String>((ref, search) async {
+    FutureProvider.family.autoDispose<List<SearchModel>?, String>((ref, search) async {
   log('providere girildi');
   final searchResponse = ref.watch<SearchService>(searchServiceProvider);
   return await searchResponse.getAutoCompleteResult(search);
@@ -182,6 +182,8 @@ final appPageControllerProvider =
 //FormController() provider
 final formControllerProvider =
     ChangeNotifierProvider((ref) => FormController());
+
+
 
 // city and day info
 final cityAndDay = Provider((ref) => {'Berlin': 7});

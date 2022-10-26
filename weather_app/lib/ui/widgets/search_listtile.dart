@@ -11,8 +11,12 @@ class SearchListtile extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return ListTile(
-      leading: Text(
-        '${searchModel.name},${searchModel.region},${searchModel.country}',
+      title: Text(
+        '${searchModel.name}, ${searchModel.region}',
+        style: sfPro500Weight.copyWith(fontSize: size.width * 0.05),
+      ),
+      subtitle: Text(
+        '${searchModel.country}',
         style: sfPro400Weight.copyWith(fontSize: size.width * 0.04),
       ),
     );
