@@ -11,19 +11,27 @@ import 'package:weather_app/data/models/forecast.dart';
 import 'package:weather_app/data/models/location.dart';
 import 'package:weather_app/data/models/main_models/weather_current.dart';
 import 'package:weather_app/data/models/main_models/weather_forecast.dart';
+import 'package:weather_app/data/models/search.dart';
 import 'package:weather_app/data/service/weather/current_service.dart';
 import 'package:weather_app/data/service/weather/forecast_service.dart';
+import 'package:weather_app/data/service/weather/search_autocomplete.dart';
 
 // CurrentWeatherService() provider
-final currentWeatherService = Provider((ref) => CurrentWeatherService());
+final currentWeatherServiceProvider =
+    Provider((ref) => CurrentWeatherService());
 
 // ForecastWeatherService() provider
-final forecastWeatherService = Provider((ref) => ForecastWeatherService());
+final forecastWeatherServiceProvider =
+    Provider((ref) => ForecastWeatherService());
+
+// SearchService() provider
+final searchServiceProvider = Provider((ref) => SearchService());
 
 // Current weather response
 final currentWeatherResponse =
     FutureProvider.family<CurrentWeather?, String>((ref, city) async {
-  final currentDio = ref.watch<CurrentWeatherService>(currentWeatherService);
+  final currentDio =
+      ref.watch<CurrentWeatherService>(currentWeatherServiceProvider);
   return await currentDio.getCurrentWeather(city);
 });
 
@@ -36,9 +44,18 @@ final forecastWeatherResponse =
     FutureProvider.family<ForecastWeather?, Map<String, int>>(
         (ref, forecastInfos) async {
   log('providere girildi');
-  final forecastDio = ref.watch<ForecastWeatherService>(forecastWeatherService);
+  final forecastDio =
+      ref.watch<ForecastWeatherService>(forecastWeatherServiceProvider);
   return await forecastDio.getForecastWeather(
       forecastInfos.values.first, forecastInfos.keys.first);
+});
+
+// search response
+final searchProvider =
+    FutureProvider.family<List<SearchModel>?, String>((ref, search) async {
+  log('providere girildi');
+  final searchResponse = ref.watch<SearchService>(searchServiceProvider);
+  return await searchResponse.getAutoCompleteResult(search);
 });
 
 // //Location() provider
@@ -164,7 +181,7 @@ final appPageControllerProvider =
 
 //FormController() provider
 final formControllerProvider =
-    ChangeNotifierProvider((ref) => FormController());  
+    ChangeNotifierProvider((ref) => FormController());
 
 // city and day info
 final cityAndDay = Provider((ref) => {'Berlin': 7});

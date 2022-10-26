@@ -23,6 +23,16 @@ class AppPageController extends ChangeNotifier {
     }
   }
 
+  // backToAddedPage() {
+  //   // if (_pageViewController.hasClients) {
+  //   //   _pageViewController.jumpToPage(2);
+  //   //   notifyListeners();
+  //   // }
+
+  //   _pageViewController.jumpToPage(1);
+  //     notifyListeners();
+  // }
+
   tooglePanel() {
     _panelController.isPanelOpen ? closePanel() : openPanel();
   }

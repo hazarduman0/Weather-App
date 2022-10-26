@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:weather_app/routes/route.dart';
 import 'package:weather_app/theme/theme_constants.dart';
 import 'package:weather_app/theme/theme_manager.dart';
 import 'package:weather_app/ui/screens/main_page.dart';
@@ -23,7 +24,8 @@ class MyApp extends StatelessWidget {
       theme: lightTheme,
       darkTheme: darkTheme,
       themeMode: _themeManager.themeMode,
-      home: MainPage(),
+      //routerConfig: router,
+      home: const MainPage(),
     );
   }
 }
