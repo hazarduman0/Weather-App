@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -6,6 +7,7 @@ import 'package:weather_app/core/helpers/decoration_helper.dart';
 import 'package:weather_app/data/providers/providers.dart';
 import 'package:weather_app/ui/widgets/custom_consumer_widget.dart';
 import 'package:weather_app/ui/widgets/empty_info_widget.dart';
+import 'package:weather_app/ui/widgets/svg_widget.dart';
 
 class WindWidget extends StatelessWidget {
   const WindWidget({super.key});
@@ -28,15 +30,11 @@ class WindWidget extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                    SvgPicture.asset(
-                      'assets/weather_icons/windsock.svg',
-                      height: 30.0,
-                      width: 30.0,
-                    ),
-                    Text(
+                    SvgWidget(svgPath: 'assets/weather_icons/windsock.svg'),
+                    AutoSizeText(
                       'WIND',
                       style: sfPro600Weight.copyWith(
-                          color: Colors.grey, fontSize: size.width * 0.04),
+                          color: Colors.grey, fontSize: 16.0),
                     )
                   ],
                 ),
@@ -45,24 +43,21 @@ class WindWidget extends StatelessWidget {
                     final forecastInfo = ref.watch(cityAndDay);
                     final direction =
                         ref.watch(windDirectionProvider(forecastInfo));
-                    return Text(direction ?? 'N/A',
-                        style: sfPro600Weight.copyWith(
-                            fontSize: size.width * 0.07));
+                    return AutoSizeText(direction ?? 'N/A',
+                        style: sfPro600Weight.copyWith(fontSize: 25.0));
                   },
                 ),
                 Consumer(
                   builder: (context, ref, child) {
                     final forecastInfo = ref.watch(cityAndDay);
-                    final windSpeed =
-                        ref.watch(windKphProvider(forecastInfo));
-                    return Text(windSpeed.toString(),
-                        style: sfPro800Weight.copyWith(
-                            fontSize: size.width * 0.08));
+                    final windSpeed = ref.watch(windKphProvider(forecastInfo));
+                    return AutoSizeText(windSpeed.toString(),
+                        style: sfPro800Weight.copyWith(fontSize: 30.0));
                   },
                 ),
                 //TODO: kph mph durumunu kontrol edecek satırları yaz
-                Text('kph',
-                    style: sfPro800Weight.copyWith(fontSize: size.width * 0.06))
+                AutoSizeText('kph',
+                    style: sfPro800Weight.copyWith(fontSize: 25.0))
               ],
             )),
       );

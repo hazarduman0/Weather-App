@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
@@ -72,8 +73,8 @@ Widget weatherInformationTexts(Size size) => Column(
             final forecastInfo = ref.watch(cityAndDay);
             final locationResponse =
                 ref.watch<Location?>(locationProvider(forecastInfo));
-            return Text(locationResponse!.name!,
-                style: sfPro400Weight.copyWith(fontSize: size.width * 0.07));
+            return AutoSizeText(locationResponse!.name!,
+                style: sfPro400Weight.copyWith(fontSize: 30.0));
           },
         ),
         Consumer(
@@ -81,9 +82,9 @@ Widget weatherInformationTexts(Size size) => Column(
             final forecastInfo = ref.watch(cityAndDay);
             final currentResponse =
                 ref.watch<Current?>(currentProvider(forecastInfo));
-            return Text(
+            return AutoSizeText(
               '${currentResponse!.tempC!.floor().toString()}°',
-              style: sfPro200Weight.copyWith(fontSize: size.width * 0.16),
+              style: sfPro200Weight.copyWith(fontSize: 70.0),
             );
           },
         ),
@@ -94,9 +95,9 @@ Widget weatherInformationTexts(Size size) => Column(
                 final forecastInfo = ref.watch(cityAndDay);
                 final conditionResponse =
                     ref.watch<Condition?>(conditionProvider(forecastInfo));
-                return Text(
+                return AutoSizeText(
                   conditionResponse!.text!,
-                  style: sfPro600Weight.copyWith(fontSize: size.width * 0.05),
+                  style: sfPro600Weight.copyWith(fontSize: 25.0),
                 );
               },
             );

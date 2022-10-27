@@ -2,7 +2,6 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
 import 'package:weather_app/core/constants/app_colors.dart';
 import 'package:weather_app/data/models/search.dart';
 import 'package:weather_app/data/providers/providers.dart';

@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -6,6 +7,7 @@ import 'package:weather_app/core/helpers/decoration_helper.dart';
 import 'package:weather_app/data/providers/providers.dart';
 import 'package:weather_app/ui/widgets/custom_consumer_widget.dart';
 import 'package:weather_app/ui/widgets/empty_info_widget.dart';
+import 'package:weather_app/ui/widgets/svg_widget.dart';
 
 class FeelsLikeWidget extends StatelessWidget {
   const FeelsLikeWidget({super.key});
@@ -28,15 +30,11 @@ class FeelsLikeWidget extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  SvgPicture.asset(
-                    'assets/weather_icons/thermometer.svg',
-                    height: 30.0,
-                    width: 30.0,
-                  ),
-                  Text(
+                  SvgWidget(svgPath: 'assets/weather_icons/thermometer.svg'),
+                  AutoSizeText(
                     'FEELS LIKE',
                     style: sfPro600Weight.copyWith(
-                        color: Colors.grey, fontSize: size.width * 0.04),
+                        color: Colors.grey, fontSize: 16.0),
                   )
                 ],
               ),
@@ -48,9 +46,9 @@ class FeelsLikeWidget extends StatelessWidget {
                       ref.watch(feelsLikeCProvider(forecastInfo));
                   // TODO: C ile F farkını ayıracak satırları yaz
                   final feelsLikeString = feelsLikeC!.floor().toString();
-                  return Text('$feelsLikeString °C',
+                  return AutoSizeText('$feelsLikeString °C',
                       style: sfPro500Weight.copyWith(
-                          color: Colors.white, fontSize: size.width * 0.12));
+                          color: Colors.white, fontSize: 45.0));
                 },
               )
             ],

@@ -45,7 +45,8 @@ class PanelWidget extends StatelessWidget {
           child: Container(
             decoration: slideUpDecoration,
             child: ListView(
-              physics: const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
+              physics: const BouncingScrollPhysics(
+                  parent: AlwaysScrollableScrollPhysics()),
               controller: controller,
               padding: EdgeInsets.zero,
               children: [
@@ -57,18 +58,19 @@ class PanelWidget extends StatelessWidget {
                 SizedBox(height: size.height * 0.02),
                 hourlyForecastView(size), //tabbarview oluştur
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 40.0),
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 20.0, vertical: 40.0),
                   child: Wrap(
-                    spacing: size.width * 0.05,
-                    runSpacing: size.width * 0.05,
-                    children: const[
-                    UvIndexWidget(),
-                    SunriseSunsetWidget(),
-                    WindWidget(),
-                    FeelsLikeWidget(),
-                    VisibilityWidget(),
-                    HumidityWidget()
-                  ]),
+                      spacing: size.width * 0.05,
+                      runSpacing: size.width * 0.05,
+                      children: const [
+                        UvIndexWidget(),
+                        SunriseSunsetWidget(),
+                        WindWidget(),
+                        FeelsLikeWidget(),
+                        VisibilityWidget(),
+                        HumidityWidget()
+                      ]),
                 )
               ],
             ),
@@ -81,7 +83,7 @@ class PanelWidget extends StatelessWidget {
   Widget hourlyForecastView(Size size) => Consumer(
         builder: (context, ref, child) {
           final forecastInfo = ref.watch(cityAndDay);
-          final response = ref.watch(forecastWeatherResponse(forecastInfo)); 
+          final response = ref.watch(forecastWeatherResponse(forecastInfo));
           //bilgiler provider den mi yoksa üst widgetten mi alınsın değerlendir.
           //provider, scroll hareketinde ekranın yeniden çizilmesine neden oluyor.
           final forecastResponse = ref.watch(forecastProvider(forecastInfo));
@@ -130,33 +132,29 @@ class PanelWidget extends StatelessWidget {
       );
 
   Widget tabBarBuild(Size size) => TabBar(
-          labelStyle: sfPro600Weight.copyWith(fontSize: size.width * 0.04),
-          labelColor: darkSecondary,
-          indicatorSize: TabBarIndicatorSize.label,
-          indicator: const BoxDecoration(
-            gradient: tabIndicatorGradient,
-            borderRadius: BorderRadius.all(Radius.circular(20.0)),
-          ),
-          indicatorWeight: 0,
-          indicatorPadding: const EdgeInsets.only(top: 45), //size.height * 0.055
-          tabs: const [
-            Tab(text: hourlyForecast),
-            Tab(
-              text: weeklyForecast,
-            )
-          ]);
+      labelStyle: sfPro600Weight.copyWith(fontSize: size.width * 0.04),
+      labelColor: darkSecondary,
+      indicatorSize: TabBarIndicatorSize.label,
+      indicator: const BoxDecoration(
+        gradient: tabIndicatorGradient,
+        borderRadius: BorderRadius.all(Radius.circular(20.0)),
+      ),
+      indicatorWeight: 0,
+      indicatorPadding: const EdgeInsets.only(top: 45), //size.height * 0.055
+      tabs: const [Tab(text: hourlyForecast), Tab(text: weeklyForecast)]);
 
   Widget buildDragHandle() => Consumer(
         builder: (context, ref, child) {
-          final controllerRef = ref.watch<AppPageController>(appPageControllerProvider);
+          final controllerRef =
+              ref.watch<AppPageController>(appPageControllerProvider);
           return GestureDetector(
             onTap: () {
               controllerRef.tooglePanel();
             },
             child: Center(
               child: Container(
-                width: 30.0,
                 height: 5.0,
+                width: 30.0,
                 decoration: dragHandleDecoration,
               ),
             ),

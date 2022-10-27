@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:weather_app/core/constants/app_text_styles.dart';
@@ -27,13 +28,14 @@ class VisibilityWidget extends StatelessWidget {
               children: [
                 Row(
                   children: [
+                    //TODO: Svg widgetteki size ye uydur.
                     const Icon(Icons.remove_red_eye_rounded,
                         size: 20.0, color: Colors.grey),
                     SizedBox(width: size.width * 0.01),
-                    Text(
+                    AutoSizeText(
                       'VISIBILITY',
                       style: sfPro600Weight.copyWith(
-                          color: Colors.grey, fontSize: size.width * 0.04),
+                          color: Colors.grey, fontSize: 16.0),
                     )
                   ],
                 ),
@@ -44,9 +46,9 @@ class VisibilityWidget extends StatelessWidget {
                     final visibilityKm =
                         ref.watch(visibilityKmProvider(forecastInfo));
                     final visibilityKmString = visibilityKm!.floor().toString();
-                    return Text('$visibilityKmString km',
+                    return AutoSizeText('$visibilityKmString km',
                         style: sfPro500Weight.copyWith(
-                            color: Colors.white, fontSize: size.width * 0.1));
+                            color: Colors.white, fontSize: 40.0));
                   },
                 )
               ],

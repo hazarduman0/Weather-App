@@ -1,9 +1,10 @@
 import 'dart:ui' as ui;
 
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:weather_app/core/constants/app_paddings.dart';
 import 'package:weather_app/core/constants/app_text_styles.dart';
+import 'package:weather_app/ui/widgets/svg_widget.dart';
 
 class WeatherWidget extends StatelessWidget {
   const WeatherWidget({super.key});
@@ -36,16 +37,12 @@ class WeatherWidget extends StatelessWidget {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text('23º',
+                          AutoSizeText('23º',
                               style: sfPro400Weight.copyWith(fontSize: 60.0)),
-                          SvgPicture.asset(
-                            'assets/weather_icons/clear-day.svg',
-                            height:
-                                ((size.width * 0.5116959064327485) * 0.9) * 0.7,
-                            width:
-                                ((size.width * 0.5116959064327485) * 0.9) * 0.7,
-                            fit: BoxFit.cover,
-                          )
+                          SvgWidget(
+                              svgPath: 'assets/weather_icons/clear-day.svg',
+                              boxSize:
+                                  size.width * 0.5116959064327485 * 0.9 * 0.7)
                         ],
                       ),
                     ),
@@ -57,9 +54,13 @@ class WeatherWidget extends StatelessWidget {
                               weatherWidgetInformationHorizontalPadding(size),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children:  [
-                              Text('London', style: sfPro300Weight.copyWith(fontSize: size.width * 0.06)),
-                              Text('Sunny', style: sfPro600Weight)
+                            children: [
+                              AutoSizeText('London',
+                                  style:
+                                      sfPro300Weight.copyWith(fontSize: 25.0)),
+                              AutoSizeText('Sunny',
+                                  style:
+                                      sfPro600Weight.copyWith(fontSize: 20.0))
                             ],
                           ),
                         ))

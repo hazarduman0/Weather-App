@@ -1,7 +1,9 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:weather_app/core/constants/app_text_styles.dart';
 import 'package:weather_app/core/helpers/decoration_helper.dart';
+import 'package:weather_app/ui/widgets/svg_widget.dart';
 
 class HumidityWidget extends StatelessWidget {
   const HumidityWidget({super.key});
@@ -20,20 +22,18 @@ class HumidityWidget extends StatelessWidget {
           children: [
             Row(
               children: [
-                SvgPicture.asset(
-                  'assets/weather_icons/humidity.svg',
-                  height: 30.0,
-                  width: 30.0,
-                ),
-                Text(
+                SvgWidget(svgPath: 'assets/weather_icons/humidity.svg'),
+                AutoSizeText(
                   'HUMIDITY',
                   style: sfPro600Weight.copyWith(
-                      color: Colors.grey, fontSize: size.width * 0.04),
+                      color: Colors.grey, fontSize: 16.0),
                 )
               ],
             ),
             SizedBox(height: size.height * 0.02),
-            Text('90%',style: sfPro500Weight.copyWith(color: Colors.white, fontSize: size.width * 0.12))
+            AutoSizeText('90%',
+                style: sfPro500Weight.copyWith(
+                    color: Colors.white, fontSize: 45.0))
           ],
         ),
       ),

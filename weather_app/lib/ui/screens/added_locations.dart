@@ -1,10 +1,9 @@
 import 'dart:developer';
 
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:weather_app/core/constants/app_text_styles.dart';
 import 'package:weather_app/core/helpers/decoration_helper.dart';
-import 'package:weather_app/routes/transitions/bouncy_page_transition.dart';
 import 'package:weather_app/routes/transitions/fade_page_transition.dart';
 import 'package:weather_app/ui/screens/search_page.dart';
 import 'package:weather_app/ui/widgets/hero_widget.dart';
@@ -76,8 +75,8 @@ Widget fakeSearchBar(Size size, BuildContext context) => GestureDetector(
                 color: Colors.white,
               ),
               SizedBox(width: size.width * 0.01),
-              Text('Search..',
-                  style: sfPro400Weight.copyWith(fontSize: size.width * 0.04))
+              AutoSizeText('Search..',
+                  style: sfPro400Weight.copyWith(fontSize: 17.0))
             ]),
           ),
         ),

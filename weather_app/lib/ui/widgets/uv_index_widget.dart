@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -8,6 +9,7 @@ import 'package:weather_app/data/providers/providers.dart';
 import 'package:weather_app/ui/widgets/custom_consumer_widget.dart';
 import 'package:weather_app/ui/widgets/custom_linear_progress_widget.dart';
 import 'package:weather_app/ui/widgets/empty_info_widget.dart';
+import 'package:weather_app/ui/widgets/svg_widget.dart';
 
 class UvIndexWidget extends StatelessWidget {
   const UvIndexWidget({super.key});
@@ -31,15 +33,11 @@ class UvIndexWidget extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                    SvgPicture.asset(
-                      'assets/weather_icons/uv-index.svg',
-                      height: 30.0,
-                      width: 30.0,
-                    ),
-                    Text(
+                    SvgWidget(svgPath: 'assets/weather_icons/uv-index.svg'),
+                    AutoSizeText(
                       'UV INDEX',
                       style: sfPro600Weight.copyWith(
-                          color: Colors.grey, fontSize: size.width * 0.04),
+                          color: Colors.grey, fontSize: 16.0),
                     )
                   ],
                 ),
@@ -47,18 +45,18 @@ class UvIndexWidget extends StatelessWidget {
                   builder: (context, ref, child) {
                     final forecastInfo = ref.watch(cityAndDay);
                     final uvResponse = ref.watch(uvProvider(forecastInfo));
-                    return Text(uvResponse!.floor().toString(),
+                    return AutoSizeText(uvResponse!.floor().toString(),
                         style: sfPro400Weight.copyWith(
-                            color: Colors.white, fontSize: size.width * 0.09));
+                            color: Colors.white, fontSize: 37.0));
                   },
                 ),
                 Consumer(
                   builder: (context, ref, child) {
                     final forecastInfo = ref.watch(cityAndDay);
                     final uvResponse = ref.watch(uvProvider(forecastInfo));
-                    return Text(uvStatus(uvResponse!),
+                    return AutoSizeText(uvStatus(uvResponse!),
                         style: sfPro400Weight.copyWith(
-                            color: Colors.white, fontSize: size.width * 0.05));
+                            color: Colors.white, fontSize: 20.0));
                   },
                 ),
                 Consumer(
