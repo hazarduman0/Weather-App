@@ -43,9 +43,8 @@ class VisibilityWidget extends StatelessWidget {
                 SizedBox(height: size.height * 0.03),
                 Consumer(
                   builder: (context, ref, child) {
-                    final forecastInfo = ref.watch(cityAndDay);
                     final visibilityKm =
-                        ref.watch(visibilityKmProvider(forecastInfo));
+                        ref.watch(visibilityKmProvider);
                     final visibilityKmString = visibilityKm!.floor().toString();
                     return AutoSizeText('$visibilityKmString km',
                         style: sfPro500Weight.copyWith(

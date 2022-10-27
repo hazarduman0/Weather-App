@@ -21,7 +21,7 @@ class HourlyForecastWidget extends StatelessWidget {
           final response = ref.watch(forecastWeatherResponse(forecastInfo));
           //bilgiler provider den mi yoksa üst widgetten mi alınsın değerlendir.
           //provider, scroll hareketinde ekranın yeniden çizilmesine neden oluyor.
-          final forecastResponse = ref.watch(forecastProvider(forecastInfo));
+          final forecastResponse = ref.watch(forecastProvider);
           return response.map(
             data: (data) {
               List<Hour>? hourList = forecastHourFormar([

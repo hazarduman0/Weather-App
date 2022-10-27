@@ -7,21 +7,20 @@ import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'package:weather_app/controllers/app_page_controller.dart';
 import 'package:weather_app/core/constants/app_colors.dart';
 import 'package:weather_app/core/constants/app_keys.dart';
-import 'package:weather_app/core/constants/app_paddings.dart';
 import 'package:weather_app/core/constants/app_text_styles.dart';
 import 'package:weather_app/core/helpers/decoration_helper.dart';
 import 'package:weather_app/core/helpers/helper.dart';
-import 'package:weather_app/data/models/hour.dart';
+import 'package:weather_app/core/helpers/icon_helper.dart';
 import 'package:weather_app/data/providers/providers.dart';
 import 'package:weather_app/ui/widgets/feels_like_widget.dart';
-import 'package:weather_app/ui/widgets/forecast_info_widget.dart';
 import 'package:weather_app/ui/widgets/hourly_forecast_widget.dart';
 import 'package:weather_app/ui/widgets/humidity_widget.dart';
-import 'package:weather_app/ui/widgets/loading_info_widget.dart';
 import 'package:weather_app/ui/widgets/sunrise_sunset_widget.dart';
 import 'package:weather_app/ui/widgets/uv_index_widget.dart';
 import 'package:weather_app/ui/widgets/visibility_widget.dart';
+import 'package:weather_app/ui/widgets/weekly_listtile_widget.dart';
 import 'package:weather_app/ui/widgets/wind_widget.dart';
+import 'package:intl/intl.dart';
 
 class PanelWidget extends StatelessWidget {
   final ScrollController controller;
@@ -68,7 +67,6 @@ class PanelWidget extends StatelessWidget {
   }
 
   Widget tabBarBuild(Size size) => TabBar(
-
       labelStyle: sfPro600Weight.copyWith(fontSize: size.longestSide * 0.02),
       labelColor: darkSecondary,
       indicatorSize: TabBarIndicatorSize.label,
@@ -81,12 +79,12 @@ class PanelWidget extends StatelessWidget {
       tabs: const [Tab(text: hourlyForecast), Tab(text: weeklyForecast)]);
 
   Widget tabBarView(Size size) => SizedBox(
-    height: size.height,
-    width: size.width,
-    child: TabBarView(children: [firstView(size), Container(height: 100,width: 100,color: Colors.green)]));
+      height: size.height,
+      width: size.width,
+      child: TabBarView(children: [firstView(size), secondView(size)]));
 
   Widget firstView(Size size) => Column(
-    mainAxisSize: MainAxisSize.min,
+        mainAxisSize: MainAxisSize.min,
         children: [
           const HourlyForecastWidget(), //tabbarview oluştur
           Padding(
@@ -106,6 +104,32 @@ class PanelWidget extends StatelessWidget {
           )
         ],
       );
+
+  Widget secondView(Size size) => Consumer(builder: (context, ref, child) {
+        final weeklyForecast = ref.watch(weeklyForecastProvider);
+        final length = weeklyForecast!.length;
+        return ListView.separated(
+            itemCount: length,
+            padding: EdgeInsets.zero,
+            itemBuilder: (context, index) {
+              return WeeklyListtileWidget(
+                  day: dayOfWeek(weeklyForecast[index].keys.first),
+                  weatherCondition: dayIconPath(conditionFormat(
+                      weeklyForecast[index].values.first.condition!.text!))!,
+                  maxTemp: weeklyForecast[index].values.first.maxtempC!.floor(),
+                  minTemp:
+                      weeklyForecast[index].values.first.mintempC!.floor());
+            },
+            separatorBuilder: (context, index) {
+              return Divider(
+                color: Colors.blueGrey,
+                thickness: 0.6,
+                height: 1.0,
+                indent: size.width * 0.03,
+                endIndent: size.width * 0.03,
+              );
+            });
+      });
 
   Widget buildDragHandle() => Consumer(
         builder: (context, ref, child) {

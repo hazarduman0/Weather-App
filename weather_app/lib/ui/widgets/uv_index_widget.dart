@@ -44,8 +44,7 @@ class UvIndexWidget extends StatelessWidget {
                 ),
                 Consumer(
                   builder: (context, ref, child) {
-                    final forecastInfo = ref.watch(cityAndDay);
-                    final uvResponse = ref.watch(uvProvider(forecastInfo));
+                    final uvResponse = ref.watch(uvProvider);
                     return AutoSizeText(uvResponse!.floor().toString(),
                         style: sfPro400Weight.copyWith(
                             color: Colors.white, fontSize: 37.0));
@@ -53,8 +52,7 @@ class UvIndexWidget extends StatelessWidget {
                 ),
                 Consumer(
                   builder: (context, ref, child) {
-                    final forecastInfo = ref.watch(cityAndDay);
-                    final uvResponse = ref.watch(uvProvider(forecastInfo));
+                    final uvResponse = ref.watch(uvProvider);
                     return AutoSizeText(uvStatus(uvResponse!),
                         style: sfPro400Weight.copyWith(
                             color: Colors.white, fontSize: 20.0));
@@ -62,8 +60,7 @@ class UvIndexWidget extends StatelessWidget {
                 ),
                 Consumer(
                   builder: (context, ref, child) {
-                    final forecastInfo = ref.watch(cityAndDay);
-                    final uvResponse = ref.watch(uvProvider(forecastInfo));
+                    final uvResponse = ref.watch(uvProvider);
                     final numString = uvResponse!.floor().toString();
                     return CustomLinearProgress(uv: int.parse(numString));
                   },

@@ -42,9 +42,8 @@ class FeelsLikeWidget extends StatelessWidget {
               SizedBox(height: size.height * 0.02),
               Consumer(
                 builder: (context, ref, child) {
-                  final forecastInfo = ref.watch(cityAndDay);
                   final feelsLikeC =
-                      ref.watch(feelsLikeCProvider(forecastInfo));
+                      ref.watch(feelsLikeCProvider);
                   // TODO: C ile F farkını ayıracak satırları yaz
                   final feelsLikeString = feelsLikeC!.floor().toString();
                   return AutoSizeText('$feelsLikeString °C',

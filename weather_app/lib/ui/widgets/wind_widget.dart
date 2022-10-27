@@ -41,17 +41,15 @@ class WindWidget extends StatelessWidget {
                 ),
                 Consumer(
                   builder: (context, ref, child) {
-                    final forecastInfo = ref.watch(cityAndDay);
                     final direction =
-                        ref.watch(windDirectionProvider(forecastInfo));
+                        ref.watch(windDirectionProvider);
                     return AutoSizeText(direction ?? 'N/A',
                         style: sfPro600Weight.copyWith(fontSize: 25.0));
                   },
                 ),
                 Consumer(
                   builder: (context, ref, child) {
-                    final forecastInfo = ref.watch(cityAndDay);
-                    final windSpeed = ref.watch(windKphProvider(forecastInfo));
+                    final windSpeed = ref.watch(windKphProvider);
                     return AutoSizeText(windSpeed.toString(),
                         style: sfPro800Weight.copyWith(fontSize: 30.0));
                   },

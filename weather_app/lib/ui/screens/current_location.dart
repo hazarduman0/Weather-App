@@ -70,18 +70,16 @@ Widget weatherInformationTexts(Size size) => Column(
       children: [
         Consumer(
           builder: (context, ref, child) {
-            final forecastInfo = ref.watch(cityAndDay);
             final locationResponse =
-                ref.watch<Location?>(locationProvider(forecastInfo));
+                ref.watch<Location?>(locationProvider);
             return AutoSizeText(locationResponse!.name!,
                 style: sfPro400Weight.copyWith(fontSize: 30.0));
           },
         ),
         Consumer(
           builder: (context, ref, child) {
-            final forecastInfo = ref.watch(cityAndDay);
             final currentResponse =
-                ref.watch<Current?>(currentProvider(forecastInfo));
+                ref.watch<Current?>(currentProvider);
             return AutoSizeText(
               '${currentResponse!.tempC!.floor().toString()}°',
               style: sfPro200Weight.copyWith(fontSize: 70.0),
@@ -92,9 +90,8 @@ Widget weatherInformationTexts(Size size) => Column(
           builder: (context, ref, child) {
             return Consumer(
               builder: (context, ref, child) {
-                final forecastInfo = ref.watch(cityAndDay);
                 final conditionResponse =
-                    ref.watch<Condition?>(conditionProvider(forecastInfo));
+                    ref.watch<Condition?>(conditionProvider);
                 return AutoSizeText(
                   conditionResponse!.text!,
                   style: sfPro600Weight.copyWith(fontSize: 25.0),

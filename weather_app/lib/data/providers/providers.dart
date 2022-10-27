@@ -1,14 +1,8 @@
 import 'dart:developer';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:weather_app/controllers/app_page_controller.dart';
-import 'package:weather_app/controllers/data_controller.dart';
 import 'package:weather_app/controllers/form_conroller.dart';
-import 'package:weather_app/data/models/condation.dart';
-import 'package:weather_app/data/models/current.dart';
-import 'package:weather_app/data/models/forecast.dart';
-import 'package:weather_app/data/models/location.dart';
+import 'package:weather_app/core/helpers/helper.dart';
 import 'package:weather_app/data/models/main_models/weather_current.dart';
 import 'package:weather_app/data/models/main_models/weather_forecast.dart';
 import 'package:weather_app/data/models/search.dart';
@@ -51,8 +45,8 @@ final forecastWeatherResponse =
 });
 
 // search response
-final searchProvider =
-    FutureProvider.family.autoDispose<List<SearchModel>?, String>((ref, search) async {
+final searchProvider = FutureProvider.family
+    .autoDispose<List<SearchModel>?, String>((ref, search) async {
   log('providere girildi');
   final searchResponse = ref.watch<SearchService>(searchServiceProvider);
   return await searchResponse.getAutoCompleteResult(search);
@@ -87,89 +81,100 @@ final searchProvider =
 // });
 
 //Location() provider
-final locationProvider = Provider.family((ref, Map<String, int> infos) {
-  final forecastInfos = ref.watch(forecastWeatherResponse(infos));
+final locationProvider = Provider((ref) {
+  final forecastInfos =
+      ref.watch(forecastWeatherResponse(ref.watch(cityAndDay)));
   log('location: ${forecastInfos.value?.location!.name}');
   return forecastInfos.value?.location;
 });
 
 //Current() provider
-final currentProvider = Provider.family((ref, Map<String, int> infos) {
-  final forecastInfos = ref.watch(forecastWeatherResponse(infos));
+final currentProvider = Provider((ref) {
+  final forecastInfos =
+      ref.watch(forecastWeatherResponse(ref.watch(cityAndDay)));
   log('current: ${forecastInfos.value?.current}');
   return forecastInfos.value?.current;
 });
 
 //Current() provider
-final forecastProvider = Provider.family((ref, Map<String, int> infos) {
-  final forecastInfos = ref.watch(forecastWeatherResponse(infos));
+final forecastProvider = Provider((ref) {
+  final forecastInfos =
+      ref.watch(forecastWeatherResponse(ref.watch(cityAndDay)));
   return forecastInfos.value?.forecast;
 });
 
 //Condition() provider
-final conditionProvider = Provider.family((ref, Map<String, int> infos) {
-  final forecastInfos = ref.watch(forecastWeatherResponse(infos));
+final conditionProvider = Provider((ref) {
+  final forecastInfos =
+      ref.watch(forecastWeatherResponse(ref.watch(cityAndDay)));
   return forecastInfos.value?.current?.condition;
 });
 
+//Weekly forecast provider
+final weeklyForecastProvider = Provider((ref) {
+  final forecastInfos =
+      ref.watch(forecastWeatherResponse(ref.watch(cityAndDay)));
+  return forecastWeekFormar(forecastInfos.value!.forecast!.forecastday);
+});
+
 //Todays data
-final todayData = Provider.family((ref, Map<String, int> infos) {
-  final forecastInfos = ref.watch(forecastProvider(infos));
+final todayData = Provider((ref) {
+  final forecastInfos = ref.watch(forecastProvider);
   return forecastInfos!.forecastday!.first;
 });
 
 //UV Provider
-final uvProvider = Provider.family((ref, Map<String, int> infos) {
-  final currentInfo = ref.watch(currentProvider(infos));
+final uvProvider = Provider((ref) {
+  final currentInfo = ref.watch(currentProvider);
   return currentInfo!.uv;
 });
 
 //Sunrise provider
-final sunRiseProvider = Provider.family((ref, Map<String, int> infos) {
-  final currentInfo = ref.watch(todayData(infos));
+final sunRiseProvider = Provider((ref) {
+  final currentInfo = ref.watch(todayData);
   return currentInfo.astro!.sunrise;
 });
 
 //Sunset provider
-final sunSetProvider = Provider.family((ref, Map<String, int> infos) {
-  final todayResponse = ref.watch(todayData(infos));
+final sunSetProvider = Provider((ref) {
+  final todayResponse = ref.watch(todayData);
   return todayResponse.astro!.sunset;
 });
 
 //Feels like C
-final feelsLikeCProvider = Provider.family((ref, Map<String, int> infos) {
-  final currentInfo = ref.watch(currentProvider(infos));
+final feelsLikeCProvider = Provider((ref) {
+  final currentInfo = ref.watch(currentProvider);
   return currentInfo!.feelslikeC;
 });
 
 //Feels like F
-final feelsLikeFProvider = Provider.family((ref, Map<String, int> infos) {
-  final currentInfo = ref.watch(currentProvider(infos));
+final feelsLikeFProvider = Provider((ref) {
+  final currentInfo = ref.watch(currentProvider);
   return currentInfo!.feelslikeF;
 });
 
 //visibility km
-final visibilityKmProvider = Provider.family((ref, Map<String, int> infos) {
-  final currentInfo = ref.watch(currentProvider(infos));
+final visibilityKmProvider = Provider((ref) {
+  final currentInfo = ref.watch(currentProvider);
   return currentInfo!.visKm;
 });
 
 //visibility miles
-final visibilityMilesProvider = Provider.family((ref, Map<String, int> infos) {
-  final currentInfo = ref.watch(currentProvider(infos));
+final visibilityMilesProvider = Provider((ref) {
+  final currentInfo = ref.watch(currentProvider);
   return currentInfo!.visMiles;
 });
 
 //wind kph
-final windKphProvider = Provider.family((ref, Map<String, int> infos) {
-  final currentInfo = ref.watch(currentProvider(infos));
+final windKphProvider = Provider((ref) {
+  final currentInfo = ref.watch(currentProvider);
   return currentInfo!.windKph;
 });
 
 //TODO: windmph ekle
 
-final windDirectionProvider = Provider.family((ref, Map<String, int> infos) {
-  final currentInfo = ref.watch(currentProvider(infos));
+final windDirectionProvider = Provider((ref) {
+  final currentInfo = ref.watch(currentProvider);
   return currentInfo!.windDir;
 });
 
@@ -183,7 +188,5 @@ final appPageControllerProvider =
 final formControllerProvider =
     ChangeNotifierProvider((ref) => FormController());
 
-
-
 // city and day info
-final cityAndDay = Provider((ref) => {'Berlin': 7});
+final cityAndDay = Provider((ref) => {'Berlin': 8});
