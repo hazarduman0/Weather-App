@@ -22,9 +22,10 @@ class FeelsLikeWidget extends StatelessWidget {
   Widget feelsLike(Size size) => Container(
         height: size.width * 0.42,
         width: size.width * 0.42,
+        constraints: const BoxConstraints(maxWidth: 250.0,maxHeight: 250.0),
         decoration: curretDataWidgetsDecorations,
         child: Padding(
-          padding: const EdgeInsets.all(15.0),
+          padding: const EdgeInsets.all(10.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

@@ -22,9 +22,10 @@ class SunriseSunsetWidget extends StatelessWidget {
   Widget sunStatus(Size size) => Container(
         height: size.width * 0.42,
         width: size.width * 0.42,
+        constraints: const BoxConstraints(maxWidth: 250.0, maxHeight: 250.0),
         decoration: curretDataWidgetsDecorations,
         child: Padding(
-          padding: const EdgeInsets.all(15.0),
+          padding: const EdgeInsets.all(10.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -33,17 +34,16 @@ class SunriseSunsetWidget extends StatelessWidget {
                 SvgWidget(svgPath: 'assets/weather_icons/sunrise.svg'),
                 AutoSizeText('SUNRISE',
                     style: sfPro600Weight.copyWith(
-                        color: Colors.grey, fontSize: 16.0))
+                        color: Colors.grey, fontSize: 16.0),
+                    maxFontSize: 25.0)
               ]),
               Consumer(
                 builder: (context, ref, child) {
                   final forecastInfo = ref.watch(cityAndDay);
                   final sunrise = ref.watch(sunRiseProvider(forecastInfo));
-                  return AutoSizeText(
-                    sunrise!,
-                    style: sfPro600Weight.copyWith(
-                        color: Colors.white, fontSize: 27.0),
-                  );
+                  return AutoSizeText(sunrise!,
+                      style: sfPro600Weight.copyWith(
+                          color: Colors.white, fontSize: 25.0));
                 },
               ),
               Row(children: [
@@ -59,7 +59,7 @@ class SunriseSunsetWidget extends StatelessWidget {
                   return AutoSizeText(
                     sunset!,
                     style: sfPro600Weight.copyWith(
-                        color: Colors.white, fontSize: 27.0),
+                        color: Colors.white, fontSize: 25.0),
                   );
                 },
               ),
