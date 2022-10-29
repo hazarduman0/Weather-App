@@ -28,6 +28,12 @@ BoxDecoration get searchBarDecoration => BoxDecoration(
       borderRadius: BorderRadius.circular(20.0),
     );
 
+BoxDecoration showModalDecoration(Size size) => BoxDecoration(
+    color: solidColor5,
+    borderRadius: BorderRadius.only(
+        topLeft: Radius.circular(size.shortestSide * 0.03),
+        topRight: Radius.circular(size.shortestSide * 0.03)));
+
 BoxDecoration forecastInfoDecoration(bool isNow) => BoxDecoration(
     gradient: isNow ? weatherInfoNowGradient() : weatherInfoGradient(),
     borderRadius: BorderRadius.circular(50.0),

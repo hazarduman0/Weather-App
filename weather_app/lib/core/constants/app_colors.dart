@@ -70,6 +70,7 @@ const solidColor1 = Color.fromRGBO(72, 49, 157, 1.0);
 const solidColor2 = Color.fromRGBO(31, 29, 71, 1.0);
 const solidColor3 = Color.fromRGBO(196, 39, 251, 1.0);
 const solidColor4 = Color.fromRGBO(224, 217, 255, 1.0);
+const solidColor5 = Color.fromRGBO(29, 27, 49, 1.0);
 
 Color blackWithOpacity(double opacity) {
   double op = opacity;
