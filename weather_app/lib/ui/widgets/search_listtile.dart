@@ -132,6 +132,7 @@ class SearchListtile extends StatelessWidget {
   //TODO: SP deki verileri ikinci sayfaya uyarla
   //TODO: Weather widgetine tıklandığında gidilecek detay sayfasını oluştur
   //TODO: Weather widgetlerin sürüklenebilir olmasını düşün
+  //TODO: Panel sayfasında wrap paddingini azalt ve responsive olmasını sağla
   //TODO: Konumdaki şehir isminden apiye istek atılmasını sağla
 
   Widget conta(Size size) => Container(
