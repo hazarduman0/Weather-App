@@ -72,7 +72,7 @@ Widget weatherInformationTexts(Size size) => Column(
           builder: (context, ref, child) {
             final locationResponse =
                 ref.watch<Location?>(locationProvider);
-            return AutoSizeText(locationResponse!.name!,
+            return AutoSizeText(locationResponse?.name ?? '--',
                 style: sfPro400Weight.copyWith(fontSize: 30.0));
           },
         ),
@@ -81,7 +81,7 @@ Widget weatherInformationTexts(Size size) => Column(
             final currentResponse =
                 ref.watch<Current?>(currentProvider);
             return AutoSizeText(
-              '${currentResponse!.tempC!.floor().toString()}°',
+              '${currentResponse?.tempC?.floor().toString() ?? '--'}°',
               style: sfPro200Weight.copyWith(fontSize: 70.0),
             );
           },
@@ -93,7 +93,7 @@ Widget weatherInformationTexts(Size size) => Column(
                 final conditionResponse =
                     ref.watch<Condition?>(conditionProvider);
                 return AutoSizeText(
-                  conditionResponse!.text!,
+                  conditionResponse?.text ?? '--',
                   style: sfPro600Weight.copyWith(fontSize: 25.0),
                 );
               },

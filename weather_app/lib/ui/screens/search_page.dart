@@ -14,6 +14,7 @@ class SearchPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    log('arama sayfası çalıştı');
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: solidColor2,

@@ -34,7 +34,7 @@ class HourlyForecastWidget extends StatelessWidget {
                 height: size.height * 0.15,
                 width: size.width,
                 child: ListView.builder(
-                  padding: weatherWidgetInformationHorizontalPadding(size),
+                  //padding: weatherWidgetInformationHorizontalPadding(size),
                   physics: const BouncingScrollPhysics(
                       parent: AlwaysScrollableScrollPhysics()),
                   scrollDirection: Axis.horizontal,
