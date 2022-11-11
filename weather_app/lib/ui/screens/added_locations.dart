@@ -14,7 +14,7 @@ class AddedLocation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    log('ikinci sayfa çalıştı');
+    //log('ikinci sayfa çalıştı');
     Size size = MediaQuery.of(context).size;
     return SafeArea(
       child: CustomScrollView(

@@ -9,8 +9,10 @@ import 'package:weather_app/core/helpers/decoration_helper.dart';
 import 'package:weather_app/core/helpers/helper.dart';
 import 'package:weather_app/core/helpers/icon_helper.dart';
 import 'package:weather_app/data/models/search.dart';
-import 'package:weather_app/data/providers/providers.dart';
-import 'package:weather_app/ui/widgets/hourly_forecast_widget.dart';
+import 'package:weather_app/data/providers/provider.dart';
+import 'package:weather_app/ui/widgets/consumer/temp_consumer_widget.dart';
+import 'package:weather_app/ui/widgets/hourly/hourly_forecast_widget.dart';
+import 'package:weather_app/ui/widgets/hourly/temp_hourly_widget.dart';
 import 'package:weather_app/ui/widgets/uv_index_widget.dart';
 import 'package:weather_app/ui/widgets/weekly_listtile_widget.dart';
 
@@ -21,7 +23,6 @@ class SearchListtile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    log('listtile çalıştı');
     Size size = MediaQuery.of(context).size;
     return ListTile(
       title: AutoSizeText(
@@ -33,8 +34,11 @@ class SearchListtile extends StatelessWidget {
         style: sfPro400Weight.copyWith(fontSize: 15.0),
       ),
       onTap: () {
+        log('listtile çalıştı');
+        log(searchModel.name!);
         showModalBottomSheet(
           isScrollControlled: true,
+          useRootNavigator: true,
           enableDrag: false,
           elevation: 5.0,
           shape: RoundedRectangleBorder(
@@ -45,79 +49,15 @@ class SearchListtile extends StatelessWidget {
           backgroundColor: Colors.transparent,
           context: context,
           builder: (context) {
-            return Container(
-              height: size.height * 0.93,
-              width: double.infinity,
-              decoration: showModalDecoration(size),
-              child: Padding(
-                padding:
-                    EdgeInsets.symmetric(horizontal: size.shortestSide * 0.02),
-                child: Column(
-                  children: [
-                    Row(
-                      children: [
-                        TextButton(
-                            onPressed: () {
-                              Navigator.pop(context);
-                            },
-                            child: AutoSizeText('Cancel')),
-                        const Spacer(),
-                        TextButton(onPressed: () {}, child: AutoSizeText('Add'))
-                      ],
-                    ),
-                    Expanded(
-                      child: CustomScrollView(
-                        physics: const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
-                        slivers: [
-                          SliverAppBar(
-                            centerTitle: true,
-                            title: titleWidget,
-                            toolbarHeight: size.height * 0.2,
-                            backgroundColor: Colors.transparent,
-                            automaticallyImplyLeading: false,
-                          ),
-                          SliverAppBar(
-                            automaticallyImplyLeading: false,
-                            toolbarHeight: size.height * 0.18,
-                            pinned: true,
-                            backgroundColor: solidColor5,
-                            title: const HourlyForecastWidget(),
-                          ),
-                          SliverList(
-                              delegate: SliverChildBuilderDelegate(
-                            childCount: 7,
-                            (context, index) {
-                              return WeeklyListtileWidget(
-                                  day: 'Monday',
-                                  weatherCondition:
-                                      weatherIconAssetPath('clear-day'),
-                                  maxTemp: 26,
-                                  minTemp: 23);
-                            },
-                          )),
-                          SliverToBoxAdapter(
-                            child: Column(
-                              children: [
-                                conta(size),
-                                conta(size),
-                                conta(size),
-                                conta(size),
-                                conta(size),
-                                conta(size),
-                                conta(size),
-                                conta(size),
-                                conta(size),
-                                conta(size)
-                              ],
-                            ),
-                          )
-                        ],
-                      ),
-                    )
-                  ],
+            log(searchModel.region.toString());
+            return TempConsumerWidget(
+                widget: newBottomSheetWidget(size, context),
+                loadingWidget: Container(
+                  height: size.height * 0.93,
+                  width: double.infinity,
+                  decoration: showModalDecoration(size),
                 ),
-              ),
-            );
+                name: searchModel.name!);
           },
         );
       },
@@ -134,6 +74,149 @@ class SearchListtile extends StatelessWidget {
   //TODO: Weather widgetlerin sürüklenebilir olmasını düşün
   //TODO: Panel sayfasında wrap paddingini azalt ve responsive olmasını sağla
   //TODO: Konumdaki şehir isminden apiye istek atılmasını sağla
+
+  Widget newBottomSheetWidget(Size size, BuildContext context) => Container(
+        height: size.height * 0.93,
+        width: double.infinity,
+        decoration: showModalDecoration(size),
+        child: Column(
+          children: [
+            addCancelRow(context),
+            Expanded(
+              child: CustomScrollView(
+                physics: const BouncingScrollPhysics(
+                    parent: AlwaysScrollableScrollPhysics()),
+                slivers: [
+                  SliverAppBar(
+                    centerTitle: true,
+                    title: titleWidget,
+                    toolbarHeight: size.height * 0.2,
+                    backgroundColor: Colors.transparent,
+                    automaticallyImplyLeading: false,
+                  ),
+                  SliverAppBar(
+                    automaticallyImplyLeading: false,
+                    toolbarHeight: size.height * 0.18,
+                    pinned: true,
+                    backgroundColor: solidColor5,
+                    title: TempHourlyWidget(name: searchModel.name!),
+                    //title: const HourlyForecastWidget(), // TempHourlyWidget(name: searchModel.name!)
+                  ),
+                  SliverList(
+                      delegate: SliverChildBuilderDelegate(
+                    childCount: 7,
+                    (context, index) {
+                      return WeeklyListtileWidget(
+                          day: 'Monday',
+                          weatherCondition: weatherIconAssetPath('clear-day'),
+                          maxTemp: 26,
+                          minTemp: 23);
+                    },
+                  )),
+                  SliverToBoxAdapter(
+                    child: Column(
+                      children: [
+                        conta(size),
+                        conta(size),
+                        conta(size),
+                        conta(size),
+                        conta(size),
+                        conta(size),
+                        conta(size),
+                        conta(size),
+                        conta(size),
+                        conta(size)
+                      ],
+                    ),
+                  )
+                ],
+              ),
+            )
+          ],
+        ),
+      );
+
+  Widget bottomSheetWidget(Size size, BuildContext context) => Container(
+        height: size.height * 0.93,
+        width: double.infinity,
+        decoration: showModalDecoration(size),
+        child: Column(
+          children: [
+            Row(
+              children: [
+                TextButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: AutoSizeText('Cancel')),
+                const Spacer(),
+                TextButton(onPressed: () {}, child: AutoSizeText('Add'))
+              ],
+            ),
+            Expanded(
+              child: CustomScrollView(
+                physics: const BouncingScrollPhysics(
+                    parent: AlwaysScrollableScrollPhysics()),
+                slivers: [
+                  SliverAppBar(
+                    centerTitle: true,
+                    title: titleWidget,
+                    toolbarHeight: size.height * 0.2,
+                    backgroundColor: Colors.transparent,
+                    automaticallyImplyLeading: false,
+                  ),
+                  SliverAppBar(
+                    automaticallyImplyLeading: false,
+                    toolbarHeight: size.height * 0.18,
+                    pinned: true,
+                    backgroundColor: solidColor5,
+                    title: const HourlyForecastWidget(),
+                  ),
+                  SliverList(
+                      delegate: SliverChildBuilderDelegate(
+                    childCount: 7,
+                    (context, index) {
+                      return WeeklyListtileWidget(
+                          day: 'Monday',
+                          weatherCondition: weatherIconAssetPath('clear-day'),
+                          maxTemp: 26,
+                          minTemp: 23);
+                    },
+                  )),
+                  SliverToBoxAdapter(
+                    child: Column(
+                      children: [
+                        conta(size),
+                        conta(size),
+                        conta(size),
+                        conta(size),
+                        conta(size),
+                        conta(size),
+                        conta(size),
+                        conta(size),
+                        conta(size),
+                        conta(size)
+                      ],
+                    ),
+                  )
+                ],
+              ),
+            )
+          ],
+        ),
+      );
+
+  Widget addCancelRow(BuildContext context) => Row(
+        children: [
+          TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: const AutoSizeText('Cancel')),
+          const Spacer(),
+          TextButton(onPressed: () {}, child: const AutoSizeText('Add'))
+        ],
+      );
 
   Widget conta(Size size) => Container(
         height: size.height * 0.1,
@@ -179,4 +262,37 @@ class SearchListtile extends StatelessWidget {
               );
             });
       });
+
+  //////////////////////////////////////////////
+
+  Widget get currentInfoWidget => Column(
+        children: [
+          Consumer(
+            builder: (context, ref, child) {
+              //write something
+              return AutoSizeText('Osmangazi',
+                  style: sfPro500Weight.copyWith(fontSize: 30.0));
+            },
+          ),
+          Consumer(
+            builder: (context, ref, child) {
+              //write something
+              return AutoSizeText('Açık',
+                  style: sfPro500Weight.copyWith(fontSize: 15.0));
+            },
+          ),
+          Consumer(
+            builder: (context, ref, child) {
+              //write something
+              return AutoSizeText('12 C',
+                  style: sfPro500Weight.copyWith(fontSize: 35.0));
+            },
+          ),
+          Consumer(builder: (context, ref, child) {
+            //write something
+            return AutoSizeText('Y:22 D:7',
+                style: sfPro500Weight.copyWith(fontSize: 15.0));
+          }),
+        ],
+      );
 }

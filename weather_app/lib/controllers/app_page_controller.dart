@@ -15,7 +15,7 @@ class AppPageController extends ChangeNotifier {
   }
 
   _pageViewListener() {
-    log(_pageViewController.page.toString());
+    //log(_pageViewController.page.toString());
     if (_panelController.isAttached &&
         (_panelController.isPanelAnimating ||
             _panelController.panelPosition != 0)) {

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:weather_app/data/providers/providers.dart';
+import 'package:weather_app/data/providers/provider.dart';
 
 class CustomCosumerWidget extends StatelessWidget {
   CustomCosumerWidget(

@@ -6,20 +6,10 @@ import 'package:weather_app/core/helpers/helper.dart';
 import 'package:weather_app/data/models/main_models/weather_current.dart';
 import 'package:weather_app/data/models/main_models/weather_forecast.dart';
 import 'package:weather_app/data/models/search.dart';
+import 'package:weather_app/data/providers/service_provider.dart';
 import 'package:weather_app/data/service/weather/current_service.dart';
 import 'package:weather_app/data/service/weather/forecast_service.dart';
 import 'package:weather_app/data/service/weather/search_autocomplete.dart';
-
-// CurrentWeatherService() provider
-final currentWeatherServiceProvider =
-    Provider((ref) => CurrentWeatherService());
-
-// ForecastWeatherService() provider
-final forecastWeatherServiceProvider =
-    Provider((ref) => ForecastWeatherService());
-
-// SearchService() provider
-final searchServiceProvider = Provider.autoDispose((ref) => SearchService());
 
 // Current weather response
 final currentWeatherResponse =
@@ -37,7 +27,7 @@ final currentWeatherResponse =
 final forecastWeatherResponse =
     FutureProvider.family<ForecastWeather?, Map<String, int>>(
         (ref, forecastInfos) async {
-  log('providere girildi');
+  //log('providere girildi');
   final forecastDio =
       ref.watch<ForecastWeatherService>(forecastWeatherServiceProvider);
   return await forecastDio.getForecastWeather(
@@ -47,7 +37,7 @@ final forecastWeatherResponse =
 // search response
 final searchProvider = FutureProvider.family
     .autoDispose<List<SearchModel>?, String>((ref, search) async {
-  log('providere girildi');
+  //log('providere girildi');
   final searchResponse = ref.watch<SearchService>(searchServiceProvider);
   return await searchResponse.getAutoCompleteResult(search);
 });
@@ -84,7 +74,7 @@ final searchProvider = FutureProvider.family
 final locationProvider = Provider((ref) {
   final forecastInfos =
       ref.watch(forecastWeatherResponse(ref.watch(cityAndDay)));
-  log('location: ${forecastInfos.value?.location!.name}');
+  //log('location: ${forecastInfos.value?.location!.name}');
   return forecastInfos.value?.location;
 });
 
@@ -92,11 +82,11 @@ final locationProvider = Provider((ref) {
 final currentProvider = Provider((ref) {
   final forecastInfos =
       ref.watch(forecastWeatherResponse(ref.watch(cityAndDay)));
-  log('current: ${forecastInfos.value?.current}');
+  //log('current: ${forecastInfos.value?.current}');
   return forecastInfos.value?.current;
 });
 
-//Current() provider
+//Forecast() provider
 final forecastProvider = Provider((ref) {
   final forecastInfos =
       ref.watch(forecastWeatherResponse(ref.watch(cityAndDay)));
@@ -114,14 +104,22 @@ final conditionProvider = Provider((ref) {
 final weeklyForecastProvider = Provider((ref) {
   final forecastInfos =
       ref.watch(forecastWeatherResponse(ref.watch(cityAndDay)));
-  return forecastWeekFormar(forecastInfos.value!.forecast!.forecastday);
+  return forecastWeekFormar(forecastInfos.value?.forecast?.forecastday);
 });
 
 //Todays data
 final todayData = Provider((ref) {
   final forecastInfos = ref.watch(forecastProvider);
-  return forecastInfos!.forecastday!.first;
+  return forecastInfos?.forecastday?.first;
 });
+
+
+//Tomorrows data
+final tomorrowData = Provider((ref) {
+  final forecastInfos = ref.watch(forecastProvider);
+  return forecastInfos?.forecastday?[1];
+});
+
 
 //UV Provider
 final uvProvider = Provider((ref) {
@@ -132,13 +130,13 @@ final uvProvider = Provider((ref) {
 //Sunrise provider
 final sunRiseProvider = Provider((ref) {
   final currentInfo = ref.watch(todayData);
-  return currentInfo.astro!.sunrise;
+  return currentInfo?.astro?.sunrise;
 });
 
 //Sunset provider
 final sunSetProvider = Provider((ref) {
   final todayResponse = ref.watch(todayData);
-  return todayResponse.astro!.sunset;
+  return todayResponse?.astro?.sunset;
 });
 
 //Feels like C
@@ -190,3 +188,6 @@ final formControllerProvider =
 
 // city and day info
 final cityAndDay = Provider((ref) => {'Berlin': 8});
+
+// temp city and day info
+// final tempCityandDay = Provider.family.autoDispose((ref, name) => {name : 8});

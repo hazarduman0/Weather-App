@@ -11,9 +11,9 @@ import 'package:weather_app/core/constants/app_text_styles.dart';
 import 'package:weather_app/core/helpers/decoration_helper.dart';
 import 'package:weather_app/core/helpers/helper.dart';
 import 'package:weather_app/core/helpers/icon_helper.dart';
-import 'package:weather_app/data/providers/providers.dart';
+import 'package:weather_app/data/providers/provider.dart';
 import 'package:weather_app/ui/widgets/feels_like_widget.dart';
-import 'package:weather_app/ui/widgets/hourly_forecast_widget.dart';
+import 'package:weather_app/ui/widgets/hourly/hourly_forecast_widget.dart';
 import 'package:weather_app/ui/widgets/humidity_widget.dart';
 import 'package:weather_app/ui/widgets/sunrise_sunset_widget.dart';
 import 'package:weather_app/ui/widgets/uv_index_widget.dart';
@@ -34,7 +34,7 @@ class PanelWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    log('panelwidget çizildi');
+    //log('panelwidget çizildi');
     Size size = MediaQuery.of(context).size;
 
     return DefaultTabController(

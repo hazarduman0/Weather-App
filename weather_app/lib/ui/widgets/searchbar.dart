@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:weather_app/core/constants/app_text_styles.dart';
 import 'package:weather_app/core/helpers/decoration_helper.dart';
-import 'package:weather_app/data/providers/providers.dart';
+import 'package:weather_app/data/providers/provider.dart';
 
 class SearchBar extends StatelessWidget {
   const SearchBar({super.key});

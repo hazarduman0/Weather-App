@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:weather_app/core/constants/app_colors.dart';
 import 'package:weather_app/data/models/search.dart';
-import 'package:weather_app/data/providers/providers.dart';
+import 'package:weather_app/data/providers/provider.dart';
 import 'package:weather_app/ui/widgets/hero_widget.dart';
 import 'package:weather_app/ui/widgets/search_listtile.dart';
 import 'package:weather_app/ui/widgets/searchbar.dart';
@@ -14,10 +14,11 @@ class SearchPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    log('arama sayfası çalıştı');
+    //log('arama sayfası çalıştı');
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: solidColor2,
+      resizeToAvoidBottomInset: false,
       body: SafeArea(
           child: SingleChildScrollView(
         physics: const NeverScrollableScrollPhysics(),

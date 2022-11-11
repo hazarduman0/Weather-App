@@ -10,9 +10,9 @@ import 'package:intl/intl.dart';
 List<Hour>? forecastHourFormar(List<Forecastday>? forecastday) {
   int hour = DateTime.now().hour;
   List<Hour>? hourList = [];
-  log('hour: $hour');
+  //log('hour: $hour');
   for (int i = 0; i < forecastday!.first.hour!.length; i++) {
-    log('DateTime.parse(forecastday.first.hour![i].time!).hour : ${DateTime.parse(forecastday.first.hour![i].time!).hour}');
+    //log('DateTime.parse(forecastday.first.hour![i].time!).hour : ${DateTime.parse(forecastday.first.hour![i].time!).hour}');
     if (DateTime.parse(forecastday.first.hour![i].time!).hour >= hour) {
       hourList.add(forecastday.first.hour![i]);
     }

@@ -9,8 +9,8 @@ import 'package:weather_app/core/constants/app_text_styles.dart';
 import 'package:weather_app/data/models/condation.dart';
 import 'package:weather_app/data/models/current.dart';
 import 'package:weather_app/data/models/location.dart';
-import 'package:weather_app/data/providers/providers.dart';
-import 'package:weather_app/ui/widgets/custom_consumer_widget.dart';
+import 'package:weather_app/data/providers/provider.dart';
+import 'package:weather_app/ui/widgets/consumer/custom_consumer_widget.dart';
 import 'package:weather_app/ui/widgets/panel_widget.dart';
 
 class CurrentLocationWeatherPage extends ConsumerWidget {
@@ -20,7 +20,7 @@ class CurrentLocationWeatherPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    log('CurrentLocationWeatherPage çizildi');
+    //log('CurrentLocationWeatherPage çizildi');
     Size size = MediaQuery.of(context).size;
     final controllerWatch = ref.watch<AppPageController>(appPageControllerProvider);
     final controllerRead = ref.read<AppPageController>(appPageControllerProvider);

@@ -4,9 +4,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:weather_app/core/constants/app_text_styles.dart';
 import 'package:weather_app/core/helpers/decoration_helper.dart';
-import 'package:weather_app/data/providers/providers.dart';
-import 'package:weather_app/ui/widgets/custom_consumer_widget.dart';
-import 'package:weather_app/ui/widgets/empty_info_widget.dart';
+import 'package:weather_app/data/providers/provider.dart';
+import 'package:weather_app/ui/widgets/consumer/custom_consumer_widget.dart';
+import 'package:weather_app/ui/widgets/loading/empty_info_widget.dart';
 import 'package:weather_app/ui/widgets/svg_widget.dart';
 
 class SunriseSunsetWidget extends StatelessWidget {
