@@ -4,8 +4,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:weather_app/core/constants/app_text_styles.dart';
 import 'package:weather_app/core/helpers/decoration_helper.dart';
 import 'package:weather_app/data/providers/provider.dart';
-import 'package:weather_app/ui/widgets/consumer/custom_consumer_widget.dart';
-import 'package:weather_app/ui/widgets/loading/empty_info_widget.dart';
 
 class VisibilityWidget extends StatelessWidget {
   const VisibilityWidget({super.key});
@@ -13,11 +11,7 @@ class VisibilityWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return CustomCosumerWidget(
-        widget: visibilityWidget(size), loadingWidget: const EmptyInfoWidget());
-  }
-
-  Widget visibilityWidget(Size size) => Container(
+    return Container(
         height: size.width * 0.42,
         width: size.width * 0.42,
         constraints: const BoxConstraints(maxWidth: 250.0,maxHeight: 250.0),
@@ -54,4 +48,5 @@ class VisibilityWidget extends StatelessWidget {
               ],
             )),
       );
+  }
 }

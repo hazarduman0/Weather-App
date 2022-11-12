@@ -1,12 +1,9 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:weather_app/core/constants/app_text_styles.dart';
 import 'package:weather_app/core/helpers/decoration_helper.dart';
 import 'package:weather_app/data/providers/provider.dart';
-import 'package:weather_app/ui/widgets/consumer/custom_consumer_widget.dart';
-import 'package:weather_app/ui/widgets/loading/empty_info_widget.dart';
 import 'package:weather_app/ui/widgets/svg_widget.dart';
 
 class SunriseSunsetWidget extends StatelessWidget {
@@ -15,11 +12,7 @@ class SunriseSunsetWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return CustomCosumerWidget(
-        widget: sunStatus(size), loadingWidget: const EmptyInfoWidget());
-  }
-
-  Widget sunStatus(Size size) => Container(
+    return Container(
         height: size.width * 0.42,
         width: size.width * 0.42,
         constraints: const BoxConstraints(maxWidth: 250.0, maxHeight: 250.0),
@@ -65,4 +58,5 @@ class SunriseSunsetWidget extends StatelessWidget {
           ),
         ),
       );
+  }
 }

@@ -11,6 +11,7 @@ import 'package:weather_app/core/constants/app_text_styles.dart';
 import 'package:weather_app/core/helpers/decoration_helper.dart';
 import 'package:weather_app/core/helpers/helper.dart';
 import 'package:weather_app/core/helpers/icon_helper.dart';
+import 'package:weather_app/data/models/forecast.dart';
 import 'package:weather_app/data/providers/provider.dart';
 import 'package:weather_app/ui/widgets/feels_like_widget.dart';
 import 'package:weather_app/ui/widgets/hourly/hourly_forecast_widget.dart';
@@ -86,7 +87,12 @@ class PanelWidget extends StatelessWidget {
   Widget firstView(Size size) => Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          const HourlyForecastWidget(), //tabbarview oluştur
+          Consumer(builder: (context, ref, child) {
+            final today = ref.watch<Forecastday?>(todayData);
+            final tomorrow = ref.watch<Forecastday?>(tomorrowData);
+            log("today: $today");
+            return HourlyForecastWidget(today: today, tomorrow: tomorrow);
+          },), //tabbarview oluştur
           Padding(
             padding:
                 const EdgeInsets.symmetric(horizontal: 10.0, vertical: 40.0),

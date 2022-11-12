@@ -11,56 +11,65 @@ import 'package:weather_app/data/models/current.dart';
 import 'package:weather_app/data/models/location.dart';
 import 'package:weather_app/data/providers/provider.dart';
 import 'package:weather_app/ui/widgets/consumer/custom_consumer_widget.dart';
+import 'package:weather_app/ui/widgets/loading/location_page_loading.dart';
 import 'package:weather_app/ui/widgets/panel_widget.dart';
 
-class CurrentLocationWeatherPage extends ConsumerWidget {
+class CurrentLocationWeatherPage extends StatelessWidget {
   CurrentLocationWeatherPage({super.key});
 
   //var map = const {'London': 7};
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    //log('CurrentLocationWeatherPage çizildi');
-    Size size = MediaQuery.of(context).size;
-    final controllerWatch = ref.watch<AppPageController>(appPageControllerProvider);
-    final controllerRead = ref.read<AppPageController>(appPageControllerProvider);
-    //final response = ref.watch(currentWeatherResponse('London'));
-
-    return SizedBox(
-      height: size.height,
-      width: size.width,
-      child: SlidingUpPanel(
-        body: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            SizedBox(height: size.height * 0.2),
-            CustomCosumerWidget(
-                widget: weatherInformationTexts(size),
-                loadingWidget: const CircularProgressIndicator())
-          ],
-        ),
-        color: Colors.black.withOpacity(0.3),
-        controller: controllerWatch.panelController,
-        backdropTapClosesPanel: true,
-        // minHeight: !controllerWatch.pageViewController.hasClients
-        //     ? size.height * (0.3)
-        //     : size.height * (0.3),
-        //minHeight: panelMinHeightFormar(controllerWatch.pageViewController, size, (){controllerRead.update();}),
-        //minHeight: controllerWatch.panelMinHeight,
-        minHeight: size.height * (0.3),
-        maxHeight: size.height * 0.8,
-        parallaxEnabled: true,
-        parallaxOffset: .5,
-        panelSnapping: true,
-        borderRadius: const BorderRadius.vertical(top: Radius.circular(30.0)),
-        panelBuilder: (sc) => PanelWidget(
-          controller: sc,
-          panelController: controllerWatch.panelController,
-          //forecastday: response.value?.forecast?.forecastday ,
-        ),
-      ),
-    );
+  Widget build(BuildContext context) {
+    return CustomCosumerWidget(
+        widget: locationPage(context),
+        loadingWidget: const LocationPageLoading());
   }
+
+  Widget locationPage(BuildContext context) =>
+      Consumer(builder: (context, ref, child) {
+        //log('CurrentLocationWeatherPage çizildi');
+        Size size = MediaQuery.of(context).size;
+        final controllerWatch =
+            ref.watch<AppPageController>(appPageControllerProvider);
+        final controllerRead =
+            ref.read<AppPageController>(appPageControllerProvider);
+        //final response = ref.watch(currentWeatherResponse('London'));
+
+        return SizedBox(
+          height: size.height,
+          width: size.width,
+          child: SlidingUpPanel(
+            body: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                SizedBox(height: size.height * 0.2),
+                weatherInformationTexts(size)
+              ],
+            ),
+            color: Colors.black.withOpacity(0.3),
+            controller: controllerWatch.panelController,
+            backdropTapClosesPanel: true,
+            // minHeight: !controllerWatch.pageViewController.hasClients
+            //     ? size.height * (0.3)
+            //     : size.height * (0.3),
+            //minHeight: panelMinHeightFormar(controllerWatch.pageViewController, size, (){controllerRead.update();}),
+            //minHeight: controllerWatch.panelMinHeight,
+            minHeight: size.height * (0.3),
+            maxHeight: size.height * 0.8,
+            parallaxEnabled: true,
+            parallaxOffset: .5,
+            panelSnapping: true,
+            borderRadius:
+                const BorderRadius.vertical(top: Radius.circular(30.0)),
+            panelBuilder: (sc) => PanelWidget(
+              controller: sc,
+              panelController: controllerWatch.panelController,
+              //forecastday: response.value?.forecast?.forecastday ,
+            ),
+          ),
+        );
+      });
 }
 
 Widget weatherInformationTexts(Size size) => Column(
@@ -70,16 +79,14 @@ Widget weatherInformationTexts(Size size) => Column(
       children: [
         Consumer(
           builder: (context, ref, child) {
-            final locationResponse =
-                ref.watch<Location?>(locationProvider);
+            final locationResponse = ref.watch<Location?>(locationProvider);
             return AutoSizeText(locationResponse?.name ?? '--',
                 style: sfPro400Weight.copyWith(fontSize: 30.0));
           },
         ),
         Consumer(
           builder: (context, ref, child) {
-            final currentResponse =
-                ref.watch<Current?>(currentProvider);
+            final currentResponse = ref.watch<Current?>(currentProvider);
             return AutoSizeText(
               '${currentResponse?.tempC?.floor().toString() ?? '--'}°',
               style: sfPro200Weight.copyWith(fontSize: 70.0),

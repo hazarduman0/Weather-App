@@ -1,7 +1,7 @@
 import 'dart:developer';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:weather_app/controllers/app_page_controller.dart';
-import 'package:weather_app/controllers/form_conroller.dart';
+import 'package:weather_app/controllers/form_controller.dart';
 import 'package:weather_app/core/helpers/helper.dart';
 import 'package:weather_app/data/models/main_models/weather_current.dart';
 import 'package:weather_app/data/models/main_models/weather_forecast.dart';
@@ -187,7 +187,7 @@ final formControllerProvider =
     ChangeNotifierProvider((ref) => FormController());
 
 // city and day info
-final cityAndDay = Provider((ref) => {'Berlin': 8});
+final cityAndDay = Provider((ref) => const {'Berlin': 8});
 
 // temp city and day info
 // final tempCityandDay = Provider.family.autoDispose((ref, name) => {name : 8});

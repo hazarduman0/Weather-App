@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:weather_app/data/providers/temp_provider.dart';
@@ -19,13 +21,16 @@ class TempConsumerWidget extends StatelessWidget {
       builder: (context, ref, child) {
         // final forecastInfo = ref.watch(cityAndDay);
         // final response = ref.watch(forecastWeatherResponse(forecastInfo));
-        final response =  ref.watch(tempForecastWeatherResponse({name: 8}));
-        return response.when(
+        log('consumere girdi');
+        final response =  ref.watch(tempForecastWeatherResponse({EquatableParams(name: name): 8}));
+        return response.map(
           data: (data) => widget,
-          error: (error, stackTrace) => Text('Something went wrong. Error: $error'),
-          loading: () => loadingWidget,
+          error: (error) => Text('Something went wrong. Error: $error'),
+          loading: (loading) => loadingWidget,
         );
       },
     );
   }
 }
+
+
