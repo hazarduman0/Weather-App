@@ -6,7 +6,6 @@ import 'package:weather_app/ui/screens/main_page.dart';
 
 void main() {
   runApp(const ProviderScope(
-    
     child: MyApp()));
 }
 

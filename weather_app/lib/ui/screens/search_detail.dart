@@ -6,13 +6,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:weather_app/core/constants/app_colors.dart';
 import 'package:weather_app/core/constants/app_text_styles.dart';
 import 'package:weather_app/core/helpers/decoration_helper.dart';
-import 'package:weather_app/core/helpers/icon_helper.dart';
 import 'package:weather_app/data/models/forecast.dart';
 import 'package:weather_app/data/providers/temp_provider.dart';
 import 'package:weather_app/ui/widgets/consumer/temp_consumer_widget.dart';
 import 'package:weather_app/ui/widgets/forecast/hourly_forecast_widget.dart';
+import 'package:weather_app/ui/widgets/forecast/weekly_forecast_widget.dart';
 import 'package:weather_app/ui/widgets/loading/new_location_loading.dart';
-import 'package:weather_app/ui/widgets/forecast/weekly_listtile_widget.dart';
 
 class SearchDetail extends StatelessWidget {
   SearchDetail({super.key, required this.name});
@@ -67,17 +66,19 @@ class SearchDetail extends StatelessWidget {
                   ),
                   //title: const HourlyForecastWidget(), // TempHourlyWidget(name: searchModel.name!)
                 ),
-                SliverList(
-                    delegate: SliverChildBuilderDelegate(
-                  childCount: 7,
-                  (context, index) {
-                    return WeeklyListtileWidget(
-                        day: 'Monday',
-                        weatherCondition: weatherIconAssetPath('clear-day'),
-                        maxTemp: 26,
-                        minTemp: 23);
-                  },
-                )),
+                SliverAppBar(
+                  automaticallyImplyLeading: false,
+                  toolbarHeight: size.height * 0.5,
+                  pinned: false,
+                  backgroundColor: solidColor5,
+                  title: Consumer(
+                    builder: (context, ref, child) {
+                      final weeklyForecast = ref.watch(tempWeeklyForecastProvider(SearchParams(name: name, day: 8)));
+                      return WeeklyForecastWidget(weeklyForecast: weeklyForecast, physics: const NeverScrollableScrollPhysics());
+                    },
+                  ),
+                  //title: const HourlyForecastWidget(), // TempHourlyWidget(name: searchModel.name!)
+                ),
                 SliverToBoxAdapter(
                   child: Column(
                     children: [

@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:riverpod/riverpod.dart';
 import 'package:weather_app/core/helpers/helper.dart';
+import 'package:weather_app/data/models/day.dart';
 import 'package:weather_app/data/providers/service_provider.dart';
 import 'package:weather_app/data/service/weather/forecast_service.dart';
 import 'package:weather_app/data/models/main_models/weather_forecast.dart';

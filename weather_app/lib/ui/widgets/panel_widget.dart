@@ -13,6 +13,7 @@ import 'package:weather_app/core/helpers/helper.dart';
 import 'package:weather_app/core/helpers/icon_helper.dart';
 import 'package:weather_app/data/models/forecast.dart';
 import 'package:weather_app/data/providers/provider.dart';
+import 'package:weather_app/ui/widgets/forecast/weekly_forecast_widget.dart';
 import 'package:weather_app/ui/widgets/panel_components/feels_like_widget.dart';
 import 'package:weather_app/ui/widgets/forecast/hourly_forecast_widget.dart';
 import 'package:weather_app/ui/widgets/humidity_widget.dart';
@@ -87,12 +88,14 @@ class PanelWidget extends StatelessWidget {
   Widget firstView(Size size) => Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Consumer(builder: (context, ref, child) {
-            final today = ref.watch<Forecastday?>(todayData);
-            final tomorrow = ref.watch<Forecastday?>(tomorrowData);
-            log("today: $today");
-            return HourlyForecastWidget(today: today, tomorrow: tomorrow);
-          },), //tabbarview oluştur
+          Consumer(
+            builder: (context, ref, child) {
+              final today = ref.watch<Forecastday?>(todayData);
+              final tomorrow = ref.watch<Forecastday?>(tomorrowData);
+              log("today: $today");
+              return HourlyForecastWidget(today: today, tomorrow: tomorrow);
+            },
+          ), //tabbarview oluştur
           Padding(
             padding:
                 const EdgeInsets.symmetric(horizontal: 10.0, vertical: 40.0),
@@ -113,28 +116,10 @@ class PanelWidget extends StatelessWidget {
 
   Widget secondView(Size size) => Consumer(builder: (context, ref, child) {
         final weeklyForecast = ref.watch(weeklyForecastProvider);
-        final length = weeklyForecast!.length;
-        return ListView.separated(
-            itemCount: length,
-            padding: EdgeInsets.zero,
-            itemBuilder: (context, index) {
-              return WeeklyListtileWidget(
-                  day: dayOfWeek(weeklyForecast[index].keys.first),
-                  weatherCondition: dayIconPath(conditionFormat(
-                      weeklyForecast[index].values.first.condition!.text!))!,
-                  maxTemp: weeklyForecast[index].values.first.maxtempC!.floor(),
-                  minTemp:
-                      weeklyForecast[index].values.first.mintempC!.floor());
-            },
-            separatorBuilder: (context, index) {
-              return Divider(
-                color: Colors.blueGrey,
-                thickness: 0.6,
-                height: 1.0,
-                indent: size.width * 0.03,
-                endIndent: size.width * 0.03,
-              );
-            });
+        return WeeklyForecastWidget(
+            weeklyForecast: weeklyForecast,
+            physics: const BouncingScrollPhysics(
+                parent: AlwaysScrollableScrollPhysics()));
       });
 
   Widget buildDragHandle() => Consumer(
