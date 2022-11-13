@@ -5,7 +5,7 @@ import 'package:weather_app/core/constants/app_text_styles.dart';
 import 'package:weather_app/core/helpers/decoration_helper.dart';
 import 'package:weather_app/core/helpers/helper.dart';
 import 'package:weather_app/data/providers/provider.dart';
-import 'package:weather_app/ui/widgets/custom_linear_progress_widget.dart';
+import 'package:weather_app/ui/widgets/panel_components/custom_linear_progress_widget.dart';
 import 'package:weather_app/ui/widgets/svg_widget.dart';
 
 class UvIndexWidget extends StatelessWidget {

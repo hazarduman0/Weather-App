@@ -14,8 +14,8 @@ import 'package:weather_app/data/providers/provider.dart';
 import 'package:weather_app/data/providers/temp_provider.dart';
 import 'package:weather_app/ui/screens/search_detail.dart';
 import 'package:weather_app/ui/widgets/consumer/temp_consumer_widget.dart';
-import 'package:weather_app/ui/widgets/hourly/hourly_forecast_widget.dart';
-import 'package:weather_app/ui/widgets/weekly_listtile_widget.dart';
+import 'package:weather_app/ui/widgets/forecast/hourly_forecast_widget.dart';
+import 'package:weather_app/ui/widgets/forecast/weekly_listtile_widget.dart';
 
 class SearchListtile extends StatelessWidget {
   SearchListtile({super.key, required this.searchModel});

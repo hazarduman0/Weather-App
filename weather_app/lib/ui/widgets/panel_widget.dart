@@ -13,14 +13,14 @@ import 'package:weather_app/core/helpers/helper.dart';
 import 'package:weather_app/core/helpers/icon_helper.dart';
 import 'package:weather_app/data/models/forecast.dart';
 import 'package:weather_app/data/providers/provider.dart';
-import 'package:weather_app/ui/widgets/feels_like_widget.dart';
-import 'package:weather_app/ui/widgets/hourly/hourly_forecast_widget.dart';
+import 'package:weather_app/ui/widgets/panel_components/feels_like_widget.dart';
+import 'package:weather_app/ui/widgets/forecast/hourly_forecast_widget.dart';
 import 'package:weather_app/ui/widgets/humidity_widget.dart';
-import 'package:weather_app/ui/widgets/sunrise_sunset_widget.dart';
-import 'package:weather_app/ui/widgets/uv_index_widget.dart';
-import 'package:weather_app/ui/widgets/visibility_widget.dart';
-import 'package:weather_app/ui/widgets/weekly_listtile_widget.dart';
-import 'package:weather_app/ui/widgets/wind_widget.dart';
+import 'package:weather_app/ui/widgets/panel_components/sunrise_sunset_widget.dart';
+import 'package:weather_app/ui/widgets/panel_components/uv_index_widget.dart';
+import 'package:weather_app/ui/widgets/panel_components/visibility_widget.dart';
+import 'package:weather_app/ui/widgets/forecast/weekly_listtile_widget.dart';
+import 'package:weather_app/ui/widgets/panel_components/wind_widget.dart';
 import 'package:intl/intl.dart';
 
 class PanelWidget extends StatelessWidget {

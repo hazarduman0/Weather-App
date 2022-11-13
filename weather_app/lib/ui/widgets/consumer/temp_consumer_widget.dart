@@ -22,7 +22,7 @@ class TempConsumerWidget extends StatelessWidget {
         // final forecastInfo = ref.watch(cityAndDay);
         // final response = ref.watch(forecastWeatherResponse(forecastInfo));
         log('consumere girdi');
-        final response =  ref.watch(tempForecastWeatherResponse({EquatableParams(name: name): 8}));
+        final response =  ref.watch(tempForecastWeatherResponse(SearchParams(name: name, day: 8)));
         return response.map(
           data: (data) => widget,
           error: (error) => Text('Something went wrong. Error: $error'),

@@ -3,7 +3,7 @@ import 'package:weather_app/core/constants/app_paddings.dart';
 import 'package:weather_app/core/helpers/helper.dart';
 import 'package:weather_app/data/models/forecast.dart';
 import 'package:weather_app/data/models/hour.dart';
-import 'package:weather_app/ui/widgets/forecast_info_widget.dart';
+import 'package:weather_app/ui/widgets/forecast/forecast_info_widget.dart';
 
 class HourlyForecastWidget extends StatelessWidget {
    HourlyForecastWidget({super.key, required this.today, required this.tomorrow});
