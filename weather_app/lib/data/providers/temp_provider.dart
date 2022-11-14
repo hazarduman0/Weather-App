@@ -100,6 +100,50 @@ final tempMaxMinTemperature = Provider.family.autoDispose<List<String>, SearchPa
   return [maxTemp,mintTemp];
 });
 
+//temp sunrise provider
+final tempSunrise = Provider.family.autoDispose<String?, SearchParams>((ref, search) {
+  final today = ref.watch(tempTodayData(search));
+  return today?.astro?.sunrise;
+});
+
+//temp sunset provider
+final tempSunset = Provider.family.autoDispose<String?, SearchParams>((ref, search) {
+  final today = ref.watch(tempTodayData(search));
+  return today?.astro?.sunset;
+});
+
+//temp humidity
+final tempHumidity = Provider.family.autoDispose<String?, SearchParams>((ref, search) {
+ final current = ref.watch(tempCurrentProvider(search));
+ return "%${current?.humidity}"; 
+});
+
+//temp wind
+final tempWind = Provider.family.autoDispose<String?, SearchParams>((ref, search) {
+  final current = ref.watch(tempCurrentProvider(search));
+  final direction = current?.windDir.toString();
+  final windKph = current?.windKph.toString();
+  return "$direction $windKph Kph";
+});
+
+//temp feels like
+final tempFeelsLike = Provider.family.autoDispose<String?,SearchParams>((ref, search) {
+  final current = ref.watch(tempCurrentProvider(search));
+  return "${current?.feelslikeC?.floor()} °C";
+});
+
+//temp visibility Km
+final tempVisibilityKm = Provider.family.autoDispose<String?,SearchParams>((ref, search) {
+  final current = ref.watch(tempCurrentProvider(search));
+  return "${current?.visKm} Km";
+});
+
+//temp uv
+final tempUv = Provider.family.autoDispose<String?, SearchParams>((ref, search) {
+  final current = ref.watch(tempCurrentProvider(search));
+  return "${current?.uv?.floor()}";
+});
+
 //final nameProvider = Provider.family.autoDispose((ref, String name) => name);
 
 class SearchParams extends Equatable{

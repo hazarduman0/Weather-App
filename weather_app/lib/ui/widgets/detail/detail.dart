@@ -9,9 +9,11 @@ import 'package:weather_app/core/helpers/decoration_helper.dart';
 import 'package:weather_app/data/models/forecast.dart';
 import 'package:weather_app/data/providers/temp_provider.dart';
 import 'package:weather_app/ui/widgets/consumer/temp_consumer_widget.dart';
+import 'package:weather_app/ui/widgets/detail/detail_info.dart';
+import 'package:weather_app/ui/widgets/divider_widget.dart';
 import 'package:weather_app/ui/widgets/forecast/hourly_forecast_widget.dart';
 import 'package:weather_app/ui/widgets/forecast/weekly_forecast_widget.dart';
-import 'package:weather_app/ui/widgets/loading/new_location_loading.dart';
+import 'package:weather_app/ui/widgets/loading/detail_loading.dart';
 
 class SearchDetail extends StatelessWidget {
   SearchDetail({super.key, required this.name});
@@ -21,17 +23,14 @@ class SearchDetail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return Scaffold(
-      appBar: null,
-      body: Container(
-          height: size.height,
+    return Container(
+          height: size.height * 0.93,
           width: size.width,
           decoration: showModalDecoration(size),
           child: TempConsumerWidget(
               widget: searchDetail(size, context),
-              loadingWidget: const NewLocationPageLoading(),
-              name: name)),
-    );
+              loadingWidget: const DetailPageLoading(),
+              name: name));
   }
 
   Widget searchDetail(Size size, BuildContext context) => Column(
@@ -80,18 +79,42 @@ class SearchDetail extends StatelessWidget {
                   //title: const HourlyForecastWidget(), // TempHourlyWidget(name: searchModel.name!)
                 ),
                 SliverToBoxAdapter(
-                  child: Column(
+                  child: DividerWidget(intent: 0.0),
+                ),
+                SliverToBoxAdapter(
+                  child: Wrap(
                     children: [
-                      conta(size),
-                      conta(size),
-                      conta(size),
-                      conta(size),
-                      conta(size),
-                      conta(size),
-                      conta(size),
-                      conta(size),
-                      conta(size),
-                      conta(size)
+                      Consumer(builder: (context, ref, child) {
+                        final sunrise = ref.watch(tempSunrise(SearchParams(name: name, day: 8)));
+                       return DetailInfoWidget(status: 'SUNRISE', value: sunrise ?? '--'); 
+                      }),
+                      Consumer(builder: (context, ref, child) {
+                        final sunset = ref.watch(tempSunset(SearchParams(name: name, day: 8)));
+                        return DetailInfoWidget(status: 'SUNSET', value: sunset ?? '--');
+                      }),
+                      DividerWidget(intent: size.width * 0.03),
+                      Consumer(builder: (context, ref, child) {
+                        final humidity = ref.watch(tempHumidity(SearchParams(name: name, day: 8)));
+                       return DetailInfoWidget(status: 'HUMIDITY', value: humidity ?? '--'); 
+                      }),
+                      Consumer(builder: (context, ref, child) {
+                        final wind = ref.watch(tempWind(SearchParams(name: name, day: 8)));
+                       return DetailInfoWidget(status: 'WIND', value: wind ?? '--'); 
+                      }),
+                      DividerWidget(intent: size.width * 0.03),
+                      Consumer(builder: (context, ref, child) {
+                        final feelsLike = ref.watch(tempFeelsLike(SearchParams(name: name, day: 8)));
+                       return DetailInfoWidget(status: 'FEELSLIKE', value: feelsLike ?? '--'); 
+                      }),
+                      Consumer(builder: (context, ref, child) {
+                        final visibility = ref.watch(tempVisibilityKm(SearchParams(name: name, day: 8)));
+                       return DetailInfoWidget(status: 'VISIBILITY', value: visibility ?? '--'); 
+                      }),
+                      DividerWidget(intent: size.width * 0.03),
+                      Consumer(builder: (context, ref, child) {
+                        final uv = ref.watch(tempUv(SearchParams(name: name, day: 8)));
+                       return DetailInfoWidget(status: 'UV', value: uv ?? '--'); 
+                      }),
                     ],
                   ),
                 )
@@ -148,4 +171,6 @@ class SearchDetail extends StatelessWidget {
           })
         ],
       );
+
+
 }

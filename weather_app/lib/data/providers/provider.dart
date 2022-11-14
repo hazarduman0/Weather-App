@@ -128,13 +128,13 @@ final uvProvider = Provider((ref) {
 });
 
 //Sunrise provider
-final sunRiseProvider = Provider((ref) {
+final sunriseProvider = Provider((ref) {
   final currentInfo = ref.watch(todayData);
   return currentInfo?.astro?.sunrise;
 });
 
 //Sunset provider
-final sunSetProvider = Provider((ref) {
+final sunsetProvider = Provider((ref) {
   final todayResponse = ref.watch(todayData);
   return todayResponse?.astro?.sunset;
 });

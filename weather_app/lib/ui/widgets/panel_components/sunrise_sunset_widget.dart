@@ -32,7 +32,7 @@ class SunriseSunsetWidget extends StatelessWidget {
               ]),
               Consumer(
                 builder: (context, ref, child) {
-                  final sunrise = ref.watch(sunRiseProvider);
+                  final sunrise = ref.watch(sunriseProvider);
                   return AutoSizeText(sunrise!,
                       style: sfPro600Weight.copyWith(
                           color: Colors.white, fontSize: 25.0));
@@ -46,7 +46,7 @@ class SunriseSunsetWidget extends StatelessWidget {
               ]),
               Consumer(
                 builder: (context, ref, child) {
-                  final sunset = ref.watch(sunSetProvider);
+                  final sunset = ref.watch(sunsetProvider);
                   return AutoSizeText(
                     sunset!,
                     style: sfPro600Weight.copyWith(

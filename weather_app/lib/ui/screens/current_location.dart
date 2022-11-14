@@ -11,7 +11,7 @@ import 'package:weather_app/data/models/current.dart';
 import 'package:weather_app/data/models/location.dart';
 import 'package:weather_app/data/providers/provider.dart';
 import 'package:weather_app/ui/widgets/consumer/custom_consumer_widget.dart';
-import 'package:weather_app/ui/widgets/loading/location_page_loading.dart';
+import 'package:weather_app/ui/widgets/loading/current_loading.dart';
 import 'package:weather_app/ui/widgets/panel_widget.dart';
 
 class CurrentLocationWeatherPage extends StatelessWidget {
@@ -23,7 +23,7 @@ class CurrentLocationWeatherPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomCosumerWidget(
         widget: locationPage(context),
-        loadingWidget: const LocationPageLoading());
+        loadingWidget: const CurrentLocation());
   }
 
   Widget locationPage(BuildContext context) =>

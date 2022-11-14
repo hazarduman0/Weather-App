@@ -12,7 +12,7 @@ import 'package:weather_app/data/models/forecast.dart';
 import 'package:weather_app/data/models/search.dart';
 import 'package:weather_app/data/providers/provider.dart';
 import 'package:weather_app/data/providers/temp_provider.dart';
-import 'package:weather_app/ui/screens/search_detail.dart';
+import 'package:weather_app/ui/widgets/detail/detail.dart';
 import 'package:weather_app/ui/widgets/consumer/temp_consumer_widget.dart';
 import 'package:weather_app/ui/widgets/forecast/hourly_forecast_widget.dart';
 import 'package:weather_app/ui/widgets/forecast/weekly_listtile_widget.dart';
