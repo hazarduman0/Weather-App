@@ -1,10 +1,34 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:weather_app/data/providers/provider.dart';
 
-class TestPage extends StatelessWidget {
+class TestPage extends StatefulWidget {
   const TestPage({super.key});
 
+  @override
+  State<TestPage> createState() => _TestPageState();
+}
+
+class _TestPageState extends State<TestPage> {
+  late SharedPreferences preferences;
+
+  initPreferences()async{
+    preferences = await SharedPreferences.getInstance();
+    final items = await preferences.getStringList('locations');
+    // final success = await preferences.remove('locations');
+    log(items.toString());
+    // log(success.toString());
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    initPreferences();
+  }
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;

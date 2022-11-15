@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:weather_app/ui/widgets/svg_widget.dart';
+import 'package:weather_app/ui/widgets/svg_widget/svg_widget.dart';
 
 class CurrentLocation extends StatelessWidget {
   const CurrentLocation({super.key});

@@ -1,5 +1,6 @@
 import 'dart:developer';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:weather_app/controllers/app_page_controller.dart';
 import 'package:weather_app/controllers/form_controller.dart';
 import 'package:weather_app/core/helpers/helper.dart';
@@ -30,6 +31,7 @@ final forecastWeatherResponse =
   //log('providere girildi');
   final forecastDio =
       ref.watch<ForecastWeatherService>(forecastWeatherServiceProvider);
+  ref.read(addedProvider);
   return await forecastDio.getForecastWeather(
       forecastInfos.values.first, forecastInfos.keys.first);
 });
@@ -69,6 +71,40 @@ final searchProvider = FutureProvider.family
 //   final forecastInfos = ref.watch(forecastWeatherResponse(infos));
 //   return await forecastInfos.value?.current?.condition;
 // });
+
+//init Provider
+// final initProvider = FutureProvider.family<void, Map<String, int>>((ref, info) async{
+//   await ref.read(forecastWeatherResponse(info));
+//   await ref.read(sharedPreferenceProvider);
+
+// });
+
+// sp provider
+// final sharedPreferenceProvider = FutureProvider<List<String>?>((ref) async{
+//   final prefs = await SharedPreferences.getInstance();
+//   log(prefs.getStringList('locations').toString());
+//   return prefs.getStringList('locations');
+// });
+
+final addedProvider = FutureProvider<List<CurrentWeather>?>((ref) async {
+  final prefs = await SharedPreferences.getInstance();
+  final locationList = prefs.getStringList('locations');
+  log(locationList.toString());
+  if (locationList == null) return [];
+
+  final currentDio =
+      ref.watch<CurrentWeatherService>(currentWeatherServiceProvider);
+  List<CurrentWeather> currentList = [];
+
+  for (int i = 0; i < locationList.length; i++) {
+    final city = locationList[i];
+    final currentWeather = await currentDio.getCurrentWeather(city);
+    currentList.add(currentWeather!);
+  }
+
+  log(currentList.toString());
+  return currentList;
+});
 
 //Location() provider
 final locationProvider = Provider((ref) {
@@ -113,13 +149,11 @@ final todayData = Provider((ref) {
   return forecastInfos?.forecastday?.first;
 });
 
-
 //Tomorrows data
 final tomorrowData = Provider((ref) {
   final forecastInfos = ref.watch(forecastProvider);
   return forecastInfos?.forecastday?[1];
 });
-
 
 //UV Provider
 final uvProvider = Provider((ref) {

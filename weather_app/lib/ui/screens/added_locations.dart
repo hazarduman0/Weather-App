@@ -2,8 +2,11 @@ import 'dart:developer';
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:weather_app/core/constants/app_text_styles.dart';
 import 'package:weather_app/core/helpers/decoration_helper.dart';
+import 'package:weather_app/data/models/main_models/weather_current.dart';
+import 'package:weather_app/data/providers/provider.dart';
 import 'package:weather_app/routes/transitions/fade_page_transition.dart';
 import 'package:weather_app/ui/screens/search_page.dart';
 import 'package:weather_app/ui/widgets/hero_widget.dart';
@@ -17,7 +20,10 @@ class AddedLocation extends StatelessWidget {
     //log('ikinci sayfa çalıştı');
     Size size = MediaQuery.of(context).size;
     return SafeArea(
-      child: CustomScrollView(
+      child: Consumer(builder: (context, ref, child) {
+        final addedLocations = ref.watch(addedProvider);
+        log('addedLocations: ${addedLocations.value.toString()}');
+        return CustomScrollView(
         physics: const BouncingScrollPhysics(
             parent: AlwaysScrollableScrollPhysics()),
         slivers: [
@@ -33,18 +39,17 @@ class AddedLocation extends StatelessWidget {
           SliverToBoxAdapter(
             child: SizedBox(height: size.height * 0.05),
           ),
-          //TODO: Form da değer varsa aranan değer ile eşleşenleri sırala yoksa weatherWidgetler görüntülensin
-          //TODO: fake searchbar yap, search page hazırla, akıcı geçiş, bu sayfayı eski haline getir
           SliverList(
               delegate: SliverChildBuilderDelegate(addRepaintBoundaries: true,
                   (context, index) {
             return Padding(
               padding: EdgeInsets.symmetric(horizontal: size.width * 0.04),
-              child: addedWeathers[index],
+              child: addedWeathers(addedLocations: addedLocations.value)[index],
             );
-          }, childCount: addedWeathers.length))
+          }, childCount: addedLocations.value?.length))
         ],
-      ),
+      );
+      }),
     );
   }
 }
@@ -54,12 +59,6 @@ Widget fakeSearchBar(Size size, BuildContext context) => GestureDetector(
 
       onTap: () =>
           Navigator.push(context, FadePageTransition(widget: const SearchPage())),
-
-      // Navigator.push(
-      //     context,
-      //     MaterialPageRoute(
-      //         builder: (context) =>
-      //             const SearchPage())), //GoRouter.of(context).go('/searchpage'),
 
       child: Container(
         height: size.height * 0.07,
@@ -83,8 +82,34 @@ Widget fakeSearchBar(Size size, BuildContext context) => GestureDetector(
       ),
     );
 
-List<Widget> get addedWeathers =>
-    List.generate(7, (index) => const WeatherWidget());
+List<Widget>  addedWeathers({List<CurrentWeather>? addedLocations}) => List.generate(addedLocations!.length, (index) =>  Consumer(builder: (context, ref, child) {
+  final isDay = addedLocations[index].current?.isDay == 1;
+  final name = addedLocations[index].location?.name.toString();
+  final temp = "${addedLocations[index].current?.tempC?.floor()}°";
+  final condition = addedLocations[index].current?.condition?.text.toString();
+ return WeatherWidget(isDay: isDay, name: name!, temp: temp, condition: condition!); 
+}));
+
+// Widget addedWeathers() => Consumer(builder: (context, ref, child) {
+//   final addedLocations = ref.watch(addedProvider);
+//   // final isDay = addedLocations.value?[index].current?.isDay == 1;
+//   // final name = addedLocations.value?[index].location?.name.toString();
+//   // final temp = "${addedLocations.value?[index].current?.tempC?.floor()}°";
+//   // final condition = addedLocations.value?[index].current?.condition?.text.toString();
+//   return ListView.builder(
+//     itemCount: addedLocations.value?.length,
+//     itemBuilder: (context, index) {
+//     final addedLocations = ref.watch(addedProvider);
+//   final isDay = addedLocations.value?[index].current?.isDay == 1;
+//   final name = addedLocations.value?[index].location?.name.toString();
+//   final temp = "${addedLocations.value?[index].current?.tempC?.floor()}°";
+//   final condition = addedLocations.value?[index].current?.condition?.text.toString();
+// return WeatherWidget(isDay: isDay, name: name!, temp: temp, condition: condition!); 
+//   });
+// });
+
+
+    
 
 // SizedBox(
 //           height: size.height,

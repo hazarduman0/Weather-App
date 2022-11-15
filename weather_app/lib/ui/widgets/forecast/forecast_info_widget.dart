@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:weather_app/core/constants/app_text_styles.dart';
 import 'package:weather_app/core/helpers/decoration_helper.dart';
 import 'package:weather_app/core/helpers/icon_helper.dart';
-import 'package:weather_app/ui/widgets/svg_widget.dart';
+import 'package:weather_app/ui/widgets/svg_widget/svg_widget.dart';
+import 'package:weather_app/ui/widgets/svg_widget/weather_media.dart';
 
 class ForecastInfoWidget extends StatelessWidget {
   ForecastInfoWidget(
@@ -37,7 +38,7 @@ class ForecastInfoWidget extends StatelessWidget {
               style: sfPro600Weight.copyWith(fontSize: 15.0),
               maxFontSize: 15.0,
             ),
-            weatherMedia(isDay),
+            WeatherMedia(isDay: isDay, condition: condition, boxSize: 45.0),
             AutoSizeText('$temp°',
                 style: sfPro400Weight.copyWith(fontSize: 19), maxFontSize: 19.0)
           ],
@@ -46,9 +47,9 @@ class ForecastInfoWidget extends StatelessWidget {
     );
   }
 
-  Widget weatherMedia(bool isDay) => isDay
-      ? SvgWidget(
-          svgPath: dayIconPath(conditionFormat(condition))!, boxSize: 45.0)
-      : SvgWidget(
-          svgPath: nightIconPath(conditionFormat(condition))!, boxSize: 45.0);
+  // Widget weatherMedia(bool isDay) => isDay
+  //     ? SvgWidget(
+  //         svgPath: dayIconPath(conditionFormat(condition))!, boxSize: 45.0)
+  //     : SvgWidget(
+  //         svgPath: nightIconPath(conditionFormat(condition))!, boxSize: 45.0);
 }

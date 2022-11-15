@@ -3,10 +3,13 @@ import 'dart:developer';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:weather_app/core/constants/app_colors.dart';
 import 'package:weather_app/core/constants/app_text_styles.dart';
 import 'package:weather_app/core/helpers/decoration_helper.dart';
 import 'package:weather_app/data/models/forecast.dart';
+import 'package:weather_app/data/providers/provider.dart';
 import 'package:weather_app/data/providers/temp_provider.dart';
 import 'package:weather_app/ui/widgets/consumer/temp_consumer_widget.dart';
 import 'package:weather_app/ui/widgets/detail/detail_info.dart';
@@ -24,13 +27,13 @@ class SearchDetail extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Container(
-          height: size.height * 0.93,
-          width: size.width,
-          decoration: showModalDecoration(size),
-          child: TempConsumerWidget(
-              widget: searchDetail(size, context),
-              loadingWidget: const DetailPageLoading(),
-              name: name));
+        height: size.height * 0.93,
+        width: size.width,
+        decoration: showModalDecoration(size),
+        child: TempConsumerWidget(
+            widget: searchDetail(size, context),
+            loadingWidget: const DetailPageLoading(),
+            name: name));
   }
 
   Widget searchDetail(Size size, BuildContext context) => Column(
@@ -72,8 +75,12 @@ class SearchDetail extends StatelessWidget {
                   backgroundColor: solidColor5,
                   title: Consumer(
                     builder: (context, ref, child) {
-                      final weeklyForecast = ref.watch(tempWeeklyForecastProvider(SearchParams(name: name, day: 8)));
-                      return WeeklyForecastWidget(weeklyForecast: weeklyForecast, physics: const NeverScrollableScrollPhysics());
+                      final weeklyForecast = ref.watch(
+                          tempWeeklyForecastProvider(
+                              SearchParams(name: name, day: 8)));
+                      return WeeklyForecastWidget(
+                          weeklyForecast: weeklyForecast,
+                          physics: const NeverScrollableScrollPhysics());
                     },
                   ),
                   //title: const HourlyForecastWidget(), // TempHourlyWidget(name: searchModel.name!)
@@ -85,35 +92,49 @@ class SearchDetail extends StatelessWidget {
                   child: Wrap(
                     children: [
                       Consumer(builder: (context, ref, child) {
-                        final sunrise = ref.watch(tempSunrise(SearchParams(name: name, day: 8)));
-                       return DetailInfoWidget(status: 'SUNRISE', value: sunrise ?? '--'); 
+                        final sunrise = ref.watch(
+                            tempSunrise(SearchParams(name: name, day: 8)));
+                        return DetailInfoWidget(
+                            status: 'SUNRISE', value: sunrise ?? '--');
                       }),
                       Consumer(builder: (context, ref, child) {
-                        final sunset = ref.watch(tempSunset(SearchParams(name: name, day: 8)));
-                        return DetailInfoWidget(status: 'SUNSET', value: sunset ?? '--');
-                      }),
-                      DividerWidget(intent: size.width * 0.03),
-                      Consumer(builder: (context, ref, child) {
-                        final humidity = ref.watch(tempHumidity(SearchParams(name: name, day: 8)));
-                       return DetailInfoWidget(status: 'HUMIDITY', value: humidity ?? '--'); 
-                      }),
-                      Consumer(builder: (context, ref, child) {
-                        final wind = ref.watch(tempWind(SearchParams(name: name, day: 8)));
-                       return DetailInfoWidget(status: 'WIND', value: wind ?? '--'); 
+                        final sunset = ref.watch(
+                            tempSunset(SearchParams(name: name, day: 8)));
+                        return DetailInfoWidget(
+                            status: 'SUNSET', value: sunset ?? '--');
                       }),
                       DividerWidget(intent: size.width * 0.03),
                       Consumer(builder: (context, ref, child) {
-                        final feelsLike = ref.watch(tempFeelsLike(SearchParams(name: name, day: 8)));
-                       return DetailInfoWidget(status: 'FEELSLIKE', value: feelsLike ?? '--'); 
+                        final humidity = ref.watch(
+                            tempHumidity(SearchParams(name: name, day: 8)));
+                        return DetailInfoWidget(
+                            status: 'HUMIDITY', value: humidity ?? '--');
                       }),
                       Consumer(builder: (context, ref, child) {
-                        final visibility = ref.watch(tempVisibilityKm(SearchParams(name: name, day: 8)));
-                       return DetailInfoWidget(status: 'VISIBILITY', value: visibility ?? '--'); 
+                        final wind = ref
+                            .watch(tempWind(SearchParams(name: name, day: 8)));
+                        return DetailInfoWidget(
+                            status: 'WIND', value: wind ?? '--');
                       }),
                       DividerWidget(intent: size.width * 0.03),
                       Consumer(builder: (context, ref, child) {
-                        final uv = ref.watch(tempUv(SearchParams(name: name, day: 8)));
-                       return DetailInfoWidget(status: 'UV', value: uv ?? '--'); 
+                        final feelsLike = ref.watch(
+                            tempFeelsLike(SearchParams(name: name, day: 8)));
+                        return DetailInfoWidget(
+                            status: 'FEELSLIKE', value: feelsLike ?? '--');
+                      }),
+                      Consumer(builder: (context, ref, child) {
+                        final visibility = ref.watch(
+                            tempVisibilityKm(SearchParams(name: name, day: 8)));
+                        return DetailInfoWidget(
+                            status: 'VISIBILITY', value: visibility ?? '--');
+                      }),
+                      DividerWidget(intent: size.width * 0.03),
+                      Consumer(builder: (context, ref, child) {
+                        final uv =
+                            ref.watch(tempUv(SearchParams(name: name, day: 8)));
+                        return DetailInfoWidget(
+                            status: 'UV', value: uv ?? '--');
                       }),
                     ],
                   ),
@@ -126,22 +147,12 @@ class SearchDetail extends StatelessWidget {
 
   Widget addCancelRow(BuildContext context) => Row(
         children: [
-          TextButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              child: const AutoSizeText('Cancel')),
+          cancelButton(context),
           const Spacer(),
-          TextButton(onPressed: () {}, child: const AutoSizeText('Add'))
+          Consumer(builder: (context, ref, child) {
+            return addButton(context, ref);
+          }),
         ],
-      );
-
-  Widget conta(Size size) => Container(
-        height: size.height * 0.1,
-        width: size.width,
-        decoration: BoxDecoration(
-            color: Colors.red,
-            border: Border.all(color: solidColor5, width: 5.0)),
       );
 
   Widget get titleWidget => Column(
@@ -165,12 +176,48 @@ class SearchDetail extends StatelessWidget {
                 style: sfPro500Weight.copyWith(fontSize: 35.0));
           }),
           Consumer(builder: (context, ref, child) {
-            final maxMinInfo = ref.watch(tempMaxMinTemperature(SearchParams(name: name, day: 8)));
+            final maxMinInfo = ref
+                .watch(tempMaxMinTemperature(SearchParams(name: name, day: 8)));
             return AutoSizeText('H:${maxMinInfo.first} L:${maxMinInfo[1]}',
                 style: sfPro500Weight.copyWith(fontSize: 15.0));
           })
         ],
       );
 
+  Widget addButton(BuildContext context, WidgetRef ref) => TextButton(
+      onPressed: () async {
+        final prefs = await SharedPreferences.getInstance();
+        List<String>? locations = await prefs.getStringList('locations');
+        if (locations == null) {
+          locations = [];
+        } else {
+          if (locations.contains(name)) {
+            toastWidget('Already added', Toast.LENGTH_LONG);
+            return;
+          }
+          locations.add(name);
+        }
 
+        await prefs.setStringList('locations', locations);
+        //await ref.refresh(addedProvider);
+        await ref.read(addedProvider.future);
+        toastWidget('Added', Toast.LENGTH_SHORT);
+        Navigator.pop(context);
+      },
+      child: const AutoSizeText('Add'));
+
+  Widget cancelButton(BuildContext context) => TextButton(
+      onPressed: () {
+        Navigator.pop(context);
+      },
+      child: const AutoSizeText('Cancel'));
+
+  Future<bool?> toastWidget(String text, Toast? toast) =>
+      Fluttertoast.showToast(
+          msg: text,
+          toastLength: toast,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          textColor: Colors.white,
+          fontSize: 16.0);
 }

@@ -1,7 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:weather_app/core/constants/app_text_styles.dart';
-import 'package:weather_app/ui/widgets/svg_widget.dart';
+import 'package:weather_app/ui/widgets/svg_widget/svg_widget.dart';
 
 class WeeklyListtileWidget extends StatelessWidget {
   WeeklyListtileWidget(

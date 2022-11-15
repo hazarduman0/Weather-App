@@ -4,10 +4,15 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:weather_app/core/constants/app_paddings.dart';
 import 'package:weather_app/core/constants/app_text_styles.dart';
-import 'package:weather_app/ui/widgets/svg_widget.dart';
+import 'package:weather_app/ui/widgets/svg_widget/weather_media.dart';
 
 class WeatherWidget extends StatelessWidget {
-  const WeatherWidget({super.key});
+   WeatherWidget({super.key, required this.temp, required this.condition, required this.name, required this.isDay});
+
+  String temp;
+  String condition;
+  String name;
+  bool isDay;
 
   @override
   Widget build(BuildContext context) {
@@ -37,12 +42,9 @@ class WeatherWidget extends StatelessWidget {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          AutoSizeText('23º',
+                          AutoSizeText(temp,
                               style: sfPro400Weight.copyWith(fontSize: 60.0)),
-                          SvgWidget(
-                              svgPath: 'assets/weather_icons/clear-day.svg',
-                              boxSize:
-                                  size.width * 0.5116959064327485 * 0.9 * 0.7)
+                          WeatherMedia(isDay: isDay, condition: condition, boxSize: size.width * 0.5116959064327485 * 0.9 * 0.7)
                         ],
                       ),
                     ),
@@ -55,10 +57,10 @@ class WeatherWidget extends StatelessWidget {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              AutoSizeText('London',
+                              AutoSizeText(name,
                                   style:
                                       sfPro300Weight.copyWith(fontSize: 25.0)),
-                              AutoSizeText('Sunny',
+                              AutoSizeText(condition,
                                   style:
                                       sfPro600Weight.copyWith(fontSize: 20.0))
                             ],
