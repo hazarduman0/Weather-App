@@ -21,8 +21,8 @@ class AddedLocation extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
     return SafeArea(
       child: Consumer(builder: (context, ref, child) {
-        final addedLocations = ref.watch(addedProvider);
-        log('addedLocations: ${addedLocations.value.toString()}');
+        final addedLocations =  ref.watch(addedProvider);
+        log('addedLocations: ${addedLocations.value}');
         return CustomScrollView(
         physics: const BouncingScrollPhysics(
             parent: AlwaysScrollableScrollPhysics()),

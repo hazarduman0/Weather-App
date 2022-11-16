@@ -18,27 +18,32 @@ import 'package:weather_app/ui/widgets/forecast/hourly_forecast_widget.dart';
 import 'package:weather_app/ui/widgets/forecast/weekly_forecast_widget.dart';
 import 'package:weather_app/ui/widgets/loading/detail_loading.dart';
 
-class SearchDetail extends StatelessWidget {
-  SearchDetail({super.key, required this.name});
+class WeatherDetail extends StatelessWidget {
+  WeatherDetail({super.key, required this.name, required this.decoration, required this.header, required this.height, required this.search});
 
   String name;
+  double height;
+  Widget header;
+  bool search;
+  BoxDecoration decoration;
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Container(
-        height: size.height * 0.93,
+        height: height,//size.height * 0.93,
         width: size.width,
-        decoration: showModalDecoration(size),
+        decoration: decoration,//showModalDecoration(size),
         child: TempConsumerWidget(
             widget: searchDetail(size, context),
-            loadingWidget: const DetailPageLoading(),
+            loadingWidget:  DetailPageLoading(height: height, search: search),
             name: name));
   }
 
   Widget searchDetail(Size size, BuildContext context) => Column(
         children: [
-          addCancelRow(context),
+          //addCancelRow(context),
+          header,
           Expanded(
             child: CustomScrollView(
               physics: const BouncingScrollPhysics(
@@ -145,15 +150,7 @@ class SearchDetail extends StatelessWidget {
         ],
       );
 
-  Widget addCancelRow(BuildContext context) => Row(
-        children: [
-          cancelButton(context),
-          const Spacer(),
-          Consumer(builder: (context, ref, child) {
-            return addButton(context, ref);
-          }),
-        ],
-      );
+ 
 
   Widget get titleWidget => Column(
         children: [
@@ -184,40 +181,7 @@ class SearchDetail extends StatelessWidget {
         ],
       );
 
-  Widget addButton(BuildContext context, WidgetRef ref) => TextButton(
-      onPressed: () async {
-        final prefs = await SharedPreferences.getInstance();
-        List<String>? locations = await prefs.getStringList('locations');
-        if (locations == null) {
-          locations = [];
-        } else {
-          if (locations.contains(name)) {
-            toastWidget('Already added', Toast.LENGTH_LONG);
-            return;
-          }
-          locations.add(name);
-        }
+  
 
-        await prefs.setStringList('locations', locations);
-        //await ref.refresh(addedProvider);
-        await ref.read(addedProvider.future);
-        toastWidget('Added', Toast.LENGTH_SHORT);
-        Navigator.pop(context);
-      },
-      child: const AutoSizeText('Add'));
-
-  Widget cancelButton(BuildContext context) => TextButton(
-      onPressed: () {
-        Navigator.pop(context);
-      },
-      child: const AutoSizeText('Cancel'));
-
-  Future<bool?> toastWidget(String text, Toast? toast) =>
-      Fluttertoast.showToast(
-          msg: text,
-          toastLength: toast,
-          gravity: ToastGravity.BOTTOM,
-          timeInSecForIosWeb: 1,
-          textColor: Colors.white,
-          fontSize: 16.0);
+  
 }

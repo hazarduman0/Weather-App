@@ -1,8 +1,8 @@
 import 'dart:developer';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:weather_app/controllers/app_page_controller.dart';
-import 'package:weather_app/controllers/form_controller.dart';
+import 'package:weather_app/notifiers/app_page_notifier.dart';
+import 'package:weather_app/notifiers/form_notifier.dart';
 import 'package:weather_app/core/helpers/helper.dart';
 import 'package:weather_app/data/models/main_models/weather_current.dart';
 import 'package:weather_app/data/models/main_models/weather_forecast.dart';
@@ -31,7 +31,7 @@ final forecastWeatherResponse =
   //log('providere girildi');
   final forecastDio =
       ref.watch<ForecastWeatherService>(forecastWeatherServiceProvider);
-  ref.read(addedProvider);
+  await ref.read(addedProvider.future);
   return await forecastDio.getForecastWeather(
       forecastInfos.values.first, forecastInfos.keys.first);
 });
@@ -221,7 +221,7 @@ final formControllerProvider =
     ChangeNotifierProvider((ref) => FormController());
 
 // city and day info
-final cityAndDay = Provider((ref) => const {'Berlin': 8});
+final cityAndDay = Provider((ref) => const {'San Francisco': 8});
 
 // temp city and day info
 // final tempCityandDay = Provider.family.autoDispose((ref, name) => {name : 8});

@@ -4,7 +4,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
-import 'package:weather_app/controllers/app_page_controller.dart';
+import 'package:weather_app/notifiers/app_page_notifier.dart';
 import 'package:weather_app/core/constants/app_colors.dart';
 import 'package:weather_app/core/constants/app_keys.dart';
 import 'package:weather_app/core/constants/app_text_styles.dart';

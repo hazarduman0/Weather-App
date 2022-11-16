@@ -4,6 +4,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:weather_app/core/constants/app_paddings.dart';
 import 'package:weather_app/core/constants/app_text_styles.dart';
+import 'package:weather_app/ui/widgets/detail/detail_page.dart';
 import 'package:weather_app/ui/widgets/svg_widget/weather_media.dart';
 
 class WeatherWidget extends StatelessWidget {
@@ -17,61 +18,66 @@ class WeatherWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return SizedBox(
-      height: size.width * 0.6116959064327485,
-      width: size.width,
-      child: Stack(
-        children: [
-          CustomPaint(
-            size:
-                Size(size.width, (size.width * 0.5116959064327485).toDouble()),
-            painter: WeatherTrapezoid(),
-          ),
-          Align(
-            alignment: Alignment.topCenter,
-            child: SizedBox(
-              height: (size.width * 0.5116959064327485) * 0.9,
-              width: size.width,
-              child: Padding(
-                padding: weatherWidgetInnerPadding(size),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    SizedBox(
-                      height: ((size.width * 0.5116959064327485) * 0.9) * 0.7,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          AutoSizeText(temp,
-                              style: sfPro400Weight.copyWith(fontSize: 60.0)),
-                          WeatherMedia(isDay: isDay, condition: condition, boxSize: size.width * 0.5116959064327485 * 0.9 * 0.7)
-                        ],
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(context, MaterialPageRoute(builder: (context) => DetailPage(name: name)));
+      },
+      child: SizedBox(
+        height: size.width * 0.6116959064327485,
+        width: size.width,
+        child: Stack(
+          children: [
+            CustomPaint(
+              size:
+                  Size(size.width, (size.width * 0.5116959064327485).toDouble()),
+              painter: WeatherTrapezoid(),
+            ),
+            Align(
+              alignment: Alignment.topCenter,
+              child: SizedBox(
+                height: (size.width * 0.5116959064327485) * 0.9,
+                width: size.width,
+                child: Padding(
+                  padding: weatherWidgetInnerPadding(size),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      SizedBox(
+                        height: ((size.width * 0.5116959064327485) * 0.9) * 0.7,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            AutoSizeText(temp,
+                                style: sfPro400Weight.copyWith(fontSize: 60.0)),
+                            WeatherMedia(isDay: isDay, condition: condition, boxSize: size.width * 0.5116959064327485 * 0.9 * 0.7)
+                          ],
+                        ),
                       ),
-                    ),
-                    SizedBox(
-                        height:
-                            ((size.width * 0.5116959064327485) * 0.9) * 0.24,
-                        child: Padding(
-                          padding:
-                              weatherWidgetInformationHorizontalPadding(size),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              AutoSizeText(name,
-                                  style:
-                                      sfPro300Weight.copyWith(fontSize: 25.0)),
-                              AutoSizeText(condition,
-                                  style:
-                                      sfPro600Weight.copyWith(fontSize: 20.0))
-                            ],
-                          ),
-                        ))
-                  ],
+                      SizedBox(
+                          height:
+                              ((size.width * 0.5116959064327485) * 0.9) * 0.24,
+                          child: Padding(
+                            padding:
+                                weatherWidgetInformationHorizontalPadding(size),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                AutoSizeText(name,
+                                    style:
+                                        sfPro300Weight.copyWith(fontSize: 25.0)),
+                                AutoSizeText(condition,
+                                    style:
+                                        sfPro600Weight.copyWith(fontSize: 20.0))
+                              ],
+                            ),
+                          ))
+                    ],
+                  ),
                 ),
               ),
-            ),
-          )
-        ],
+            )
+          ],
+        ),
       ),
     );
   }

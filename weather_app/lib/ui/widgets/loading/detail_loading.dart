@@ -3,18 +3,21 @@ import 'package:flutter/material.dart';
 import 'package:weather_app/core/helpers/decoration_helper.dart';
 
 class DetailPageLoading extends StatelessWidget {
-  const DetailPageLoading({super.key});
+   DetailPageLoading({super.key, required this.height, required this.search});
+
+  double height;
+  bool search;
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Container(
-      height: size.height * 0.93,
+      height: height,
       width: size.width,
       decoration: showModalDecoration(size),
       child: Align(
         alignment: Alignment.topCenter,
-        child: addCancelRow(context),
+        child: search ? addCancelRow(context) : const SizedBox.shrink(),
       ),
     );
   }

@@ -2,7 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:weather_app/controllers/app_page_controller.dart';
+import 'package:weather_app/notifiers/app_page_notifier.dart';
 import 'package:weather_app/core/helpers/decoration_helper.dart';
 import 'package:weather_app/data/providers/provider.dart';
 import 'package:weather_app/ui/screens/added_locations.dart';
