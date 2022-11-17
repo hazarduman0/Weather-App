@@ -20,15 +20,10 @@ final currentWeatherResponse =
   return await currentDio.getCurrentWeather(city);
 });
 
-// final loadingResponse = ChangeNotifierProvider(
-//   (ref) => DataController().changeLoadingStatus(),
-// );
-
 // Forecast weather response
 final forecastWeatherResponse =
     FutureProvider.family<ForecastWeather?, Map<String, int>>(
         (ref, forecastInfos) async {
-  //log('providere girildi');
   final forecastDio =
       ref.watch<ForecastWeatherService>(forecastWeatherServiceProvider);
   await ref.read(addedProvider.future);
@@ -39,57 +34,13 @@ final forecastWeatherResponse =
 // search response
 final searchProvider = FutureProvider.family
     .autoDispose<List<SearchModel>?, String>((ref, search) async {
-  //log('providere girildi');
   final searchResponse = ref.watch<SearchService>(searchServiceProvider);
   return await searchResponse.getAutoCompleteResult(search);
 });
 
-// //Location() provider
-// final locationInfos =
-//     FutureProvider.family<Location?, Map<String, int>>((ref, infos) async {
-//   final forecastInfos = ref.watch(forecastWeatherResponse(infos));
-//   return await forecastInfos.value?.location;
-// });
-
-// //Current() provider
-// final currentInfos =
-//     FutureProvider.family<Current?, Map<String, int>>((ref, infos) async {
-//   final forecastInfos = ref.watch(forecastWeatherResponse(infos));
-//   return await forecastInfos.value?.current;
-// });
-
-// //Forecast() provider
-// final forecastInfos =
-//     FutureProvider.family<Forecast?, Map<String, int>>((ref, infos) async {
-//   final forecastInfos = ref.watch(forecastWeatherResponse(infos));
-//   return await forecastInfos.value?.forecast;
-// });
-
-// //Condition() provider
-// final conditionInfos =
-//     FutureProvider.family<Condition?, Map<String, int>>((ref, infos) async {
-//   final forecastInfos = ref.watch(forecastWeatherResponse(infos));
-//   return await forecastInfos.value?.current?.condition;
-// });
-
-//init Provider
-// final initProvider = FutureProvider.family<void, Map<String, int>>((ref, info) async{
-//   await ref.read(forecastWeatherResponse(info));
-//   await ref.read(sharedPreferenceProvider);
-
-// });
-
-// sp provider
-// final sharedPreferenceProvider = FutureProvider<List<String>?>((ref) async{
-//   final prefs = await SharedPreferences.getInstance();
-//   log(prefs.getStringList('locations').toString());
-//   return prefs.getStringList('locations');
-// });
-
 final addedProvider = FutureProvider<List<CurrentWeather>?>((ref) async {
   final prefs = await SharedPreferences.getInstance();
   final locationList = prefs.getStringList('locations');
-  log(locationList.toString());
   if (locationList == null) return [];
 
   final currentDio =
@@ -102,7 +53,6 @@ final addedProvider = FutureProvider<List<CurrentWeather>?>((ref) async {
     currentList.add(currentWeather!);
   }
 
-  log(currentList.toString());
   return currentList;
 });
 
@@ -110,7 +60,6 @@ final addedProvider = FutureProvider<List<CurrentWeather>?>((ref) async {
 final locationProvider = Provider((ref) {
   final forecastInfos =
       ref.watch(forecastWeatherResponse(ref.watch(cityAndDay)));
-  //log('location: ${forecastInfos.value?.location!.name}');
   return forecastInfos.value?.location;
 });
 
@@ -118,7 +67,6 @@ final locationProvider = Provider((ref) {
 final currentProvider = Provider((ref) {
   final forecastInfos =
       ref.watch(forecastWeatherResponse(ref.watch(cityAndDay)));
-  //log('current: ${forecastInfos.value?.current}');
   return forecastInfos.value?.current;
 });
 
@@ -210,8 +158,6 @@ final windDirectionProvider = Provider((ref) {
   return currentInfo!.windDir;
 });
 
-//final textEditingControllerProvider = Provider((ref) => TextEditingController());
-
 // AppPageController() provider
 final appPageControllerProvider =
     ChangeNotifierProvider((ref) => AppPageController());
@@ -222,6 +168,3 @@ final formControllerProvider =
 
 // city and day info
 final cityAndDay = Provider((ref) => const {'San Francisco': 8});
-
-// temp city and day info
-// final tempCityandDay = Provider.family.autoDispose((ref, name) => {name : 8});

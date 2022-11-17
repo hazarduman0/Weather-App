@@ -18,8 +18,6 @@ class SearchService {
             final singleSearch = SearchModel.fromJson(response.data[i]);
             searchs.add(singleSearch);
           }
-          log(response.data.toString());
-          //return ForecastWeather.fromJson(response.data);
           return searchs;
         }
       }

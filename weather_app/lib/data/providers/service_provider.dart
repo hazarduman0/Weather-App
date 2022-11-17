@@ -1,9 +1,9 @@
-// CurrentWeatherService() provider
 import 'package:riverpod/riverpod.dart';
 import 'package:weather_app/data/service/weather/current_service.dart';
 import 'package:weather_app/data/service/weather/forecast_service.dart';
 import 'package:weather_app/data/service/weather/search_autocomplete.dart';
 
+// CurrentWeatherService() provider
 final currentWeatherServiceProvider =
     Provider((ref) => CurrentWeatherService());
 
