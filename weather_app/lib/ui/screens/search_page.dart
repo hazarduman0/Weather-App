@@ -1,20 +1,17 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:weather_app/core/constants/app_colors.dart';
 import 'package:weather_app/data/models/search.dart';
 import 'package:weather_app/data/providers/provider.dart';
 import 'package:weather_app/ui/widgets/hero_widget.dart';
-import 'package:weather_app/ui/widgets/search_listtile.dart';
-import 'package:weather_app/ui/widgets/searchbar.dart';
+import 'package:weather_app/ui/widgets/search/search_listtile.dart';
+import 'package:weather_app/ui/widgets/search/searchbar.dart';
 
 class SearchPage extends StatelessWidget {
   const SearchPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    //log('arama sayfası çalıştı');
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: solidColor2,

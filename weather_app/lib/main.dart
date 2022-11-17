@@ -5,8 +5,7 @@ import 'package:weather_app/theme/theme_manager.dart';
 import 'package:weather_app/ui/screens/main_page.dart';
 
 void main() {
-  runApp(const ProviderScope(
-    child: MyApp()));
+  runApp(const ProviderScope(child: MyApp()));
 }
 
 ThemeManager _themeManager = ThemeManager();
@@ -22,9 +21,7 @@ class MyApp extends StatelessWidget {
       theme: lightTheme,
       darkTheme: darkTheme,
       themeMode: _themeManager.themeMode,
-      //routerConfig: router,
       home: const MainPage(),
     );
   }
 }
-

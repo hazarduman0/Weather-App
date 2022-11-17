@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:weather_app/core/constants/app_colors.dart';
 
 class CustomLinearProgress extends StatelessWidget {
-   CustomLinearProgress({super.key, required this.uv});
+  CustomLinearProgress({super.key, required this.uv});
   int uv;
 
   @override
@@ -15,22 +15,27 @@ class CustomLinearProgress extends StatelessWidget {
           Container(
             height: 5.0,
             width: double.infinity,
-            decoration: BoxDecoration(gradient: linearColor3),
+            decoration: const BoxDecoration(gradient: linearColor3),
           ),
           SizedBox(
               height: 5.0,
               width: double.infinity,
               child: Row(
                 children: [
-                  Expanded(flex: uv, child: SizedBox()),
+                  Expanded(flex: uv, child: const SizedBox()),
                   Container(
                     height: 5.0,
                     width: 5.0,
                     decoration: BoxDecoration(
                         color: Colors.white,
-                        border: Border.all(color: Colors.black, width: 0.5,style: BorderStyle.solid,strokeAlign: StrokeAlign.inside)),
+                        border: Border.all(
+                            color: Colors.black,
+                            width: 0.5,
+                            style: BorderStyle.solid,
+                            strokeAlign: StrokeAlign.inside)),
                   ),
-                  Expanded(flex: uv >= 11 ? 0 : 11-uv, child: SizedBox())
+                  Expanded(
+                      flex: uv >= 11 ? 0 : 11 - uv, child: const SizedBox())
                 ],
               ))
         ],

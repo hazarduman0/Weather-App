@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:weather_app/core/helpers/decoration_helper.dart';
 
 class DetailPageLoading extends StatelessWidget {
-   DetailPageLoading({super.key, required this.height, required this.search});
+  DetailPageLoading({super.key, required this.height, required this.search});
 
   double height;
   bool search;

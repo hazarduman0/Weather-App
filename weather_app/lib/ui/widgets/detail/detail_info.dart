@@ -21,11 +21,11 @@ class DetailInfoWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             AutoSizeText(status,
-                style:
-                    sfPro500Weight.copyWith(color: Colors.grey, fontSize: 10.0)),
+                style: sfPro500Weight.copyWith(
+                    color: Colors.grey, fontSize: 10.0)),
             AutoSizeText(value,
-                style:
-                    sfPro600Weight.copyWith(color: Colors.white, fontSize: 20.0))
+                style: sfPro600Weight.copyWith(
+                    color: Colors.white, fontSize: 20.0))
           ],
         ),
       ),

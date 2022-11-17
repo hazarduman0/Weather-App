@@ -1,6 +1,4 @@
-import 'dart:developer';
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
@@ -9,20 +7,16 @@ import 'package:weather_app/core/constants/app_colors.dart';
 import 'package:weather_app/core/constants/app_keys.dart';
 import 'package:weather_app/core/constants/app_text_styles.dart';
 import 'package:weather_app/core/helpers/decoration_helper.dart';
-import 'package:weather_app/core/helpers/helper.dart';
-import 'package:weather_app/core/helpers/icon_helper.dart';
 import 'package:weather_app/data/models/forecast.dart';
 import 'package:weather_app/data/providers/provider.dart';
 import 'package:weather_app/ui/widgets/forecast/weekly_forecast_widget.dart';
 import 'package:weather_app/ui/widgets/panel_components/feels_like_widget.dart';
 import 'package:weather_app/ui/widgets/forecast/hourly_forecast_widget.dart';
-import 'package:weather_app/ui/widgets/humidity_widget.dart';
+import 'package:weather_app/ui/widgets/panel_components/humidity_widget.dart';
 import 'package:weather_app/ui/widgets/panel_components/sunrise_sunset_widget.dart';
 import 'package:weather_app/ui/widgets/panel_components/uv_index_widget.dart';
 import 'package:weather_app/ui/widgets/panel_components/visibility_widget.dart';
-import 'package:weather_app/ui/widgets/forecast/weekly_listtile_widget.dart';
 import 'package:weather_app/ui/widgets/panel_components/wind_widget.dart';
-import 'package:intl/intl.dart';
 
 class PanelWidget extends StatelessWidget {
   final ScrollController controller;
@@ -36,7 +30,6 @@ class PanelWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //log('panelwidget çizildi');
     Size size = MediaQuery.of(context).size;
 
     return DefaultTabController(
@@ -92,10 +85,9 @@ class PanelWidget extends StatelessWidget {
             builder: (context, ref, child) {
               final today = ref.watch<Forecastday?>(todayData);
               final tomorrow = ref.watch<Forecastday?>(tomorrowData);
-              log("today: $today");
               return HourlyForecastWidget(today: today, tomorrow: tomorrow);
             },
-          ), //tabbarview oluştur
+          ),
           Padding(
             padding:
                 const EdgeInsets.symmetric(horizontal: 10.0, vertical: 40.0),
@@ -140,6 +132,4 @@ class PanelWidget extends StatelessWidget {
           );
         },
       );
-
-  //void tooglePanel() => panelController.isPanelOpen ? panelController.close() : panelController.open();
 }

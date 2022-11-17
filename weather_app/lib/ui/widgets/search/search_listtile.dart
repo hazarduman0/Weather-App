@@ -1,23 +1,13 @@
-import 'dart:developer';
-
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:weather_app/core/constants/app_colors.dart';
 import 'package:weather_app/core/constants/app_text_styles.dart';
 import 'package:weather_app/core/helpers/decoration_helper.dart';
-import 'package:weather_app/core/helpers/helper.dart';
-import 'package:weather_app/core/helpers/icon_helper.dart';
-import 'package:weather_app/data/models/forecast.dart';
 import 'package:weather_app/data/models/search.dart';
 import 'package:weather_app/data/providers/provider.dart';
-import 'package:weather_app/data/providers/temp_provider.dart';
 import 'package:weather_app/ui/widgets/detail/detail.dart';
-import 'package:weather_app/ui/widgets/consumer/temp_consumer_widget.dart';
-import 'package:weather_app/ui/widgets/forecast/hourly_forecast_widget.dart';
-import 'package:weather_app/ui/widgets/forecast/weekly_listtile_widget.dart';
 
 class SearchListtile extends StatelessWidget {
   SearchListtile({super.key, required this.searchModel});
@@ -37,8 +27,6 @@ class SearchListtile extends StatelessWidget {
         style: sfPro400Weight.copyWith(fontSize: 15.0),
       ),
       onTap: () {
-        log('listtile çalıştı');
-        log(searchModel.name!);
         showModalBottomSheet(
           isScrollControlled: true,
           useRootNavigator: true,
@@ -52,15 +40,19 @@ class SearchListtile extends StatelessWidget {
           backgroundColor: Colors.transparent,
           context: context,
           builder: (context) {
-            log(searchModel.region.toString());
-            return WeatherDetail(name: searchModel.name!,search: true, decoration: showModalDecoration(size), header: addCancelRow(context, searchModel.name!), height: size.height * 0.93);
+            return WeatherDetail(
+                name: searchModel.name!,
+                search: true,
+                decoration: showModalDecoration(size),
+                header: addCancelRow(context, searchModel.name!),
+                height: size.height * 0.93);
           },
         );
       },
     );
   }
 
-   Widget addCancelRow(BuildContext context, String name) => Row(
+  Widget addCancelRow(BuildContext context, String name) => Row(
         children: [
           cancelButton(context),
           const Spacer(),
@@ -70,29 +62,27 @@ class SearchListtile extends StatelessWidget {
         ],
       );
 
-  Widget addButton(BuildContext context, WidgetRef ref, String name) => TextButton(
-      onPressed: () async {
-        final prefs = await SharedPreferences.getInstance();
-        List<String>? locations = await prefs.getStringList('locations');
-        if (locations == null) {
-          locations = [];
-        } else {
-          if (locations.contains(name)) {
-            toastWidget('Already added', Toast.LENGTH_LONG);
-            return;
-          }
-          locations.add(name);
-        }
+  Widget addButton(BuildContext context, WidgetRef ref, String name) =>
+      TextButton(
+          onPressed: () async {
+            final prefs = await SharedPreferences.getInstance();
+            List<String>? locations = await prefs.getStringList('locations');
+            if (locations == null) {
+              locations = [];
+            } else {
+              if (locations.contains(name)) {
+                toastWidget('Already added', Toast.LENGTH_LONG);
+                return;
+              }
+              locations.add(name);
+            }
 
-        await prefs.setStringList('locations', locations);
-        //await ref.refresh(addedProvider.future);
-        //final response = await ref.watch(addedProvider.future);
-        await ref.watch(addedProvider.future);
-        log(prefs.getStringList('locations').toString());
-        toastWidget('Added', Toast.LENGTH_SHORT);
-        Navigator.pop(context);
-      },
-      child: const AutoSizeText('Add'));
+            await prefs.setStringList('locations', locations);
+            await ref.watch(addedProvider.future);
+            toastWidget('Added', Toast.LENGTH_SHORT);
+            Navigator.pop(context);
+          },
+          child: const AutoSizeText('Add'));
 
   Widget cancelButton(BuildContext context) => TextButton(
       onPressed: () {
@@ -100,7 +90,7 @@ class SearchListtile extends StatelessWidget {
       },
       child: const AutoSizeText('Cancel'));
 
-      Future<bool?> toastWidget(String text, Toast? toast) =>
+  Future<bool?> toastWidget(String text, Toast? toast) =>
       Fluttertoast.showToast(
           msg: text,
           toastLength: toast,

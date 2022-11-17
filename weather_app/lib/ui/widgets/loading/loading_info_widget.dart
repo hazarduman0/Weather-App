@@ -9,7 +9,6 @@ class LoadingInfoWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return SizedBox(
-      //tabview
       height: size.height * 0.15,
       width: size.width,
       child: ListView.builder(

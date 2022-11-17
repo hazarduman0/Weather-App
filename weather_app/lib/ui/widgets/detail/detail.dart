@@ -19,7 +19,13 @@ import 'package:weather_app/ui/widgets/forecast/weekly_forecast_widget.dart';
 import 'package:weather_app/ui/widgets/loading/detail_loading.dart';
 
 class WeatherDetail extends StatelessWidget {
-  WeatherDetail({super.key, required this.name, required this.decoration, required this.header, required this.height, required this.search});
+  WeatherDetail(
+      {super.key,
+      required this.name,
+      required this.decoration,
+      required this.header,
+      required this.height,
+      required this.search});
 
   String name;
   double height;
@@ -31,18 +37,17 @@ class WeatherDetail extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Container(
-        height: height,//size.height * 0.93,
+        height: height,
         width: size.width,
-        decoration: decoration,//showModalDecoration(size),
+        decoration: decoration,
         child: TempConsumerWidget(
             widget: searchDetail(size, context),
-            loadingWidget:  DetailPageLoading(height: height, search: search),
+            loadingWidget: DetailPageLoading(height: height, search: search),
             name: name));
   }
 
   Widget searchDetail(Size size, BuildContext context) => Column(
         children: [
-          //addCancelRow(context),
           header,
           Expanded(
             child: CustomScrollView(
@@ -71,7 +76,6 @@ class WeatherDetail extends StatelessWidget {
                           today: today, tomorrow: tomorrow);
                     },
                   ),
-                  //title: const HourlyForecastWidget(), // TempHourlyWidget(name: searchModel.name!)
                 ),
                 SliverAppBar(
                   automaticallyImplyLeading: false,
@@ -88,7 +92,6 @@ class WeatherDetail extends StatelessWidget {
                           physics: const NeverScrollableScrollPhysics());
                     },
                   ),
-                  //title: const HourlyForecastWidget(), // TempHourlyWidget(name: searchModel.name!)
                 ),
                 SliverToBoxAdapter(
                   child: DividerWidget(intent: 0.0),
@@ -150,8 +153,6 @@ class WeatherDetail extends StatelessWidget {
         ],
       );
 
- 
-
   Widget get titleWidget => Column(
         children: [
           Consumer(builder: (context, ref, child) {
@@ -180,8 +181,4 @@ class WeatherDetail extends StatelessWidget {
           })
         ],
       );
-
-  
-
-  
 }

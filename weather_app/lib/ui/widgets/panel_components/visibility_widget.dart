@@ -12,41 +12,39 @@ class VisibilityWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Container(
-        height: size.width * 0.42,
-        width: size.width * 0.42,
-        constraints: const BoxConstraints(maxWidth: 250.0,maxHeight: 250.0),
-        decoration: curretDataWidgetsDecorations,
-        child: Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  children: [
-                    //TODO: Svg widgetteki size ye uydur.
-                    const Icon(Icons.remove_red_eye_rounded,
-                        size: 20.0, color: Colors.grey),
-                    SizedBox(width: size.width * 0.01),
-                    AutoSizeText(
-                      'VISIBILITY',
-                      style: sfPro600Weight.copyWith(
-                          color: Colors.grey, fontSize: 16.0),
-                    )
-                  ],
-                ),
-                SizedBox(height: size.height * 0.03),
-                Consumer(
-                  builder: (context, ref, child) {
-                    final visibilityKm =
-                        ref.watch(visibilityKmProvider);
-                    final visibilityKmString = visibilityKm!.floor().toString();
-                    return AutoSizeText('$visibilityKmString km',
-                        style: sfPro500Weight.copyWith(
-                            color: Colors.white, fontSize: 40.0));
-                  },
-                )
-              ],
-            )),
-      );
+      height: size.width * 0.42,
+      width: size.width * 0.42,
+      constraints: const BoxConstraints(maxWidth: 250.0, maxHeight: 250.0),
+      decoration: curretDataWidgetsDecorations,
+      child: Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  const Icon(Icons.remove_red_eye_rounded,
+                      size: 20.0, color: Colors.grey),
+                  SizedBox(width: size.width * 0.01),
+                  AutoSizeText(
+                    'VISIBILITY',
+                    style: sfPro600Weight.copyWith(
+                        color: Colors.grey, fontSize: 16.0),
+                  )
+                ],
+              ),
+              SizedBox(height: size.height * 0.03),
+              Consumer(
+                builder: (context, ref, child) {
+                  final visibilityKm = ref.watch(visibilityKmProvider);
+                  final visibilityKmString = visibilityKm!.floor().toString();
+                  return AutoSizeText('$visibilityKmString km',
+                      style: sfPro500Weight.copyWith(
+                          color: Colors.white, fontSize: 40.0));
+                },
+              )
+            ],
+          )),
+    );
   }
 }

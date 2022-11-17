@@ -12,8 +12,10 @@ class CurrentLocation extends StatelessWidget {
       width: size.width,
       color: Colors.black.withOpacity(0.5),
       child: Align(
-        alignment: Alignment.center,
-        child: SvgWidget(svgPath: 'assets/weather_icons/overcast-day.svg', boxSize: size.shortestSide * 0.3)),
+          alignment: Alignment.center,
+          child: SvgWidget(
+              svgPath: 'assets/weather_icons/overcast-day.svg',
+              boxSize: size.shortestSide * 0.3)),
     );
   }
 }

@@ -13,7 +13,7 @@ class HumidityWidget extends StatelessWidget {
     return Container(
       height: size.width * 0.42,
       width: size.width * 0.42,
-      constraints: const BoxConstraints(maxWidth: 250.0,maxHeight: 250.0),
+      constraints: const BoxConstraints(maxWidth: 250.0, maxHeight: 250.0),
       decoration: curretDataWidgetsDecorations,
       child: Padding(
         padding: const EdgeInsets.all(10.0),

@@ -27,7 +27,7 @@ class WeeklyListtileWidget extends StatelessWidget {
       height: size.height * 0.07,
       width: size.width,
       child: Padding(
-        padding:  EdgeInsets.symmetric(horizontal: size.width * 0.04),
+        padding: EdgeInsets.symmetric(horizontal: size.width * 0.04),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -38,9 +38,7 @@ class WeeklyListtileWidget extends StatelessWidget {
                   style: sfPro400Weight.copyWith(fontSize: fontSize),
                   maxFontSize: maxFontSize),
             ),
-            const Spacer(
-              flex: 1
-            ),
+            const Spacer(flex: 1),
             SvgWidget(
                 svgPath: weatherCondition, boxSize: size.longestSide * 0.04),
             const Spacer(flex: 2),

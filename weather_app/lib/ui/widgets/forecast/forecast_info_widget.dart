@@ -15,7 +15,6 @@ class ForecastInfoWidget extends StatelessWidget {
       required this.isDay,
       required this.isNow});
 
-  //ForecastWeather forecastWeather;
   String hour;
   String condition;
   num temp;
@@ -46,10 +45,4 @@ class ForecastInfoWidget extends StatelessWidget {
       ),
     );
   }
-
-  // Widget weatherMedia(bool isDay) => isDay
-  //     ? SvgWidget(
-  //         svgPath: dayIconPath(conditionFormat(condition))!, boxSize: 45.0)
-  //     : SvgWidget(
-  //         svgPath: nightIconPath(conditionFormat(condition))!, boxSize: 45.0);
 }

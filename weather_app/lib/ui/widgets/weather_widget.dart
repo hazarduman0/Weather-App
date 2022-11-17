@@ -8,7 +8,12 @@ import 'package:weather_app/ui/widgets/detail/detail_page.dart';
 import 'package:weather_app/ui/widgets/svg_widget/weather_media.dart';
 
 class WeatherWidget extends StatelessWidget {
-   WeatherWidget({super.key, required this.temp, required this.condition, required this.name, required this.isDay});
+  WeatherWidget(
+      {super.key,
+      required this.temp,
+      required this.condition,
+      required this.name,
+      required this.isDay});
 
   String temp;
   String condition;
@@ -20,7 +25,8 @@ class WeatherWidget extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
     return GestureDetector(
       onTap: () {
-        Navigator.push(context, MaterialPageRoute(builder: (context) => DetailPage(name: name)));
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => DetailPage(name: name)));
       },
       child: SizedBox(
         height: size.width * 0.6116959064327485,
@@ -28,8 +34,8 @@ class WeatherWidget extends StatelessWidget {
         child: Stack(
           children: [
             CustomPaint(
-              size:
-                  Size(size.width, (size.width * 0.5116959064327485).toDouble()),
+              size: Size(
+                  size.width, (size.width * 0.5116959064327485).toDouble()),
               painter: WeatherTrapezoid(),
             ),
             Align(
@@ -49,7 +55,11 @@ class WeatherWidget extends StatelessWidget {
                           children: [
                             AutoSizeText(temp,
                                 style: sfPro400Weight.copyWith(fontSize: 60.0)),
-                            WeatherMedia(isDay: isDay, condition: condition, boxSize: size.width * 0.5116959064327485 * 0.9 * 0.7)
+                            WeatherMedia(
+                                isDay: isDay,
+                                condition: condition,
+                                boxSize:
+                                    size.width * 0.5116959064327485 * 0.9 * 0.7)
                           ],
                         ),
                       ),
@@ -63,8 +73,8 @@ class WeatherWidget extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 AutoSizeText(name,
-                                    style:
-                                        sfPro300Weight.copyWith(fontSize: 25.0)),
+                                    style: sfPro300Weight.copyWith(
+                                        fontSize: 25.0)),
                                 AutoSizeText(condition,
                                     style:
                                         sfPro600Weight.copyWith(fontSize: 20.0))

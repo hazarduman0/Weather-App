@@ -28,7 +28,6 @@ class SearchBar extends StatelessWidget {
                   decoration: inputDecoration,
                   autofocus: true,
                   onChanged: (value) {
-                    //ref.read(searchProvider(value));
                     controller.update();
                   },
                 );

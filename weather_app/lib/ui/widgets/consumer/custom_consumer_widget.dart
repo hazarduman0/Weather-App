@@ -15,7 +15,6 @@ class CustomCosumerWidget extends StatelessWidget {
       builder: (context, ref, child) {
         final forecastInfo = ref.watch(cityAndDay);
         final response = ref.watch(forecastWeatherResponse(forecastInfo));
-        //final response = ref.watch(initProvider(forecastInfo));
         return response.map(
           data: (data) => widget,
           error: (error) => Text('Something went wrong. Error: $error'),

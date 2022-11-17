@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:weather_app/core/helpers/decoration_helper.dart';
 

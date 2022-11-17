@@ -33,7 +33,7 @@ enum DayCondition {
   moderatesnow,
   patchyheavysnow,
   heavysnow,
-  icepellets, //I -> i
+  icepellets,
   lightrainshower,
   moderateorheavyrainshower,
   torrentialrainshower,
@@ -84,7 +84,7 @@ enum NightCondition {
   moderatesnow,
   patchyheavysnow,
   heavysnow,
-  icepellets, //I -> i
+  icepellets,
   lightrainshower,
   moderateorheavyrainshower,
   torrentialrainshower,
@@ -100,10 +100,4 @@ enum NightCondition {
   moderateorheavysnowwiththunder
 }
 
-enum UvIndex{
-  low,
-  medium,
-  high,
-  veryhigh,
-  extremelyhigh
-}
+enum UvIndex { low, medium, high, veryhigh, extremelyhigh }
