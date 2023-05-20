@@ -52,4 +52,4 @@ BoxDecoration forecastInfoDecoration(bool isNow) => BoxDecoration(
     border: Border.all(
         color: blackWithOpacity(0.2),
         width: 1.0,
-        strokeAlign: StrokeAlign.inside));
+        strokeAlign: BorderSide.strokeAlignInside));

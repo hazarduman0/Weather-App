@@ -32,7 +32,7 @@ class CustomLinearProgress extends StatelessWidget {
                             color: Colors.black,
                             width: 0.5,
                             style: BorderStyle.solid,
-                            strokeAlign: StrokeAlign.inside)),
+                            strokeAlign: BorderSide.strokeAlignInside)),
                   ),
                   Expanded(
                       flex: uv >= 11 ? 0 : 11 - uv, child: const SizedBox())
